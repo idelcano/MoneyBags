@@ -1,7 +1,8 @@
 package com.idelcano.moneycontrol.moneycontrol.domain.entity
 
+import com.idelcano.moneycontrol.moneycontrol.utils.DhisCodeGenerator
 import java.util.*
-data class MoneyBag (val uid:String, val name:String, val amount:Long,
+data class MoneyBag (val uid:String = DhisCodeGenerator.generateCode(), val name:String, val amount:Long,
                      val dateLimit: Date, val createdDate:Date, val iconUId:String, val priority:Int){
 
     companion object{

@@ -14,6 +14,14 @@ val iconUid:String = "iconUid"
 
 
 class MoneyBagShould {
+
+    @Test
+    fun `return correct uid when create new money bag without uid`() {
+        val moneyBag: MoneyBag
+        moneyBag = MoneyBag(name=name, amount = amount, dateLimit = dateLimit, createdDate = createdDate, iconUId = iconUid, priority = 0)
+        Assert.assertTrue(moneyBag.uid.length>0)
+    }
+
     @Test
     fun `return correct values when create new money bag with minimun priority`() {
         val moneyBag: MoneyBag
