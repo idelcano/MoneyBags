@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/create_money_bag_dialog"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp"
+    android:background="#3E80B4"
+    android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/AppDialogEdittextContainer">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_name"
+            android:inputType="textCapCharacters"
+            style="@style/AppDialogEdittext"
+            android:hint="@string/name_hint" />
+    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/AppDialogEdittextContainer">
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_amount"
+                style="@style/AppDialogEdittext"
+                android:inputType="number"
+                android:hint="@string/amount_hint" />
+        </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/AppDialogEdittextContainer">
+        <DatePicker
+            android:id="@+id/edit_date"
+            style="@style/AppDialogEdittext"
+            android:hint="@string/limit_date_hint" />
+    </android.support.design.widget.TextInputLayout>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/priority"/>
+
+        <ImageView
+            android:id="@+id/icon_stars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/save"
+            style="@style/AppDialogButton"/>
+    </ScrollView>
+
+</LinearLayout>

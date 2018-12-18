@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="create_money">Create new money</string>
     <string name="add">add</string>
+    <string name="name_hint">name</string>
+    <string name="amount_hint">amount</string>
+    <string name="limit_date_hint">limit date</string>
+    <string name="priority">priority</string>
 </resources>
