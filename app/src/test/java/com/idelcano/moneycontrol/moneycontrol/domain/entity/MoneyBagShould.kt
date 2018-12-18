@@ -1,6 +1,5 @@
-package com.idelcano.moneycontrol.moneycontrol
+package com.idelcano.moneycontrol.moneycontrol.domain.entity
 
-import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -18,7 +17,7 @@ class MoneyBagShould {
     @Test
     fun `return correct uid when create new money bag without uid`() {
         val moneyBag: MoneyBag
-        moneyBag = MoneyBag(name=name, amount = amount, dateLimit = dateLimit, createdDate = createdDate, iconUId = iconUid, priority = 0)
+        moneyBag = MoneyBag(name= name, amount = amount, dateLimit = dateLimit, createdDate = createdDate, iconUId = iconUid, priority = 0)
         Assert.assertTrue(moneyBag.uid.length>0)
     }
 
