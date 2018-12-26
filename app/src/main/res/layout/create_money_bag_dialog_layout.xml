@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/create_money_bag_dialog"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/create_money_bag_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="80dp"
     android:background="#3E80B4"
     android:orientation="vertical" >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
     <android.support.design.widget.TextInputLayout
         style="@style/AppDialogEdittextContainer">
@@ -53,6 +53,5 @@
         <Button
             android:id="@+id/save"
             style="@style/AppDialogButton"/>
-    </ScrollView>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
