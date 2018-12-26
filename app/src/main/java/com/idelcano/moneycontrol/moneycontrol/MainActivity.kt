@@ -5,6 +5,8 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagDialogFragment
 
 import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
@@ -16,7 +18,11 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, R.string.create_money, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.add, null).show()
+                    .setAction(R.string.add, View.OnClickListener {
+                        val ft = this@MainActivity.supportFragmentManager
+                        val dialogFragment = MoneyBagDialogFragment()
+                        dialogFragment.show(ft, "MoneyBagDialogFragment")
+                    }).show()
         }
     }
 
