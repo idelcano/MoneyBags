@@ -36,7 +36,7 @@ class MainActivityShould {
         onView(withText(R.string.create_money))
                 .check(matches(isDisplayed()))
 
-        onView(withText(R.string.create_money))
+        onView(withText(R.string.add))
                 .perform(click())
 
         onView(withId(R.id.create_money_bag_dialog))
