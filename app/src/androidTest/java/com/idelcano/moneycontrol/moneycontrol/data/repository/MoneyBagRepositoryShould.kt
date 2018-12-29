@@ -33,18 +33,38 @@ class MainActivityShould {
         repository.save(testMoneyBag);
 
         //then
-
-        repository.get(testMoneyBag.uid)
-        // Context of the app under test.
         assertEquals(testMoneyBag, repository.get(uid = testMoneyBag.uid))
     }
 
     @Test
-    fun `recovery_a_money_bag_stored_in_local_source`() {
+    fun `return_a_null_money_bag_after_save_and_delete_it_on_database`() {
+        //given
+        initMoneyBags()
+
+        //when
+        val repository : IMoneyBagRepository = MoneyBagRepository()
+        repository.save(testMoneyBag2);
+        repository.delete(testMoneyBag2);
+
+        //then
+        assertEquals(null, repository.get(uid = testMoneyBag2.uid))
     }
 
     @Test
     fun `recovery_all_the_money_bags_stored_in_local_source`() {
+        //given
+        initMoneyBags()
+
+        //when
+        val repository : IMoneyBagRepository = MoneyBagRepository()
+        repository.save(testMoneyBag);
+        repository.save(testMoneyBag2);
+
+        //then
+        val list : List<MoneyBag?> = repository.getAll()
+        assertEquals(2, list.size)
+        assertEquals(testMoneyBag, list.get(0))
+        assertEquals(testMoneyBag2, list.get(1))
     }
 
     fun initMoneyBags(){
