@@ -11,6 +11,7 @@ class DBController(context: Context, isTest: Boolean) {
 
     init {
         if (isTest) {
+            FlowManager.reset()
             databaseConfig = DatabaseConfig.inMemoryBuilder(
                 MoneyHelperDatabase::class.java
             )
