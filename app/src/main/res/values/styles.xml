@@ -13,23 +13,32 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="WideDialog" parent="Theme.AppCompat.Light.Dialog.MinWidth">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
     <style name="AppDialogEdittext">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:inputType">textUri</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:textColor">@color/bluetext</item>
     </style>
 
     <style name="AppDialogEdittextContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:layout_marginBottom">8dp</item>
+        <item name="colorAccent">@color/blue</item>
     </style>
 
     <style name="AppDialogButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textColor">@color/bluetext</item>
+        <item name="android:background">@color/green</item>
     </style>
 </resources>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">@color/blue</color>
+    <color name="colorPrimaryDark">@color/raspberry</color>
+    <color name="colorAccent">@color/blush</color>
+    <color name="background_dialog">@color/blue</color>
+    <color name="blue">#9AC4F8</color>
+    <color name="bluetext">#617b9c</color>
+    <color name="green">#99EDCC</color>
+    <color name="rosy_brown">#CB958E</color>
+    <color name="blush">#E36588</color>
+    <color name="raspberry">#9A275A</color>
 </resources>

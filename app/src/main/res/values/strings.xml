@@ -7,4 +7,8 @@
     <string name="amount_hint">amount</string>
     <string name="limit_date_hint">limit date</string>
     <string name="priority">priority</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
+    <string name="money_bag">Creating money bag</string>
+
 </resources>
