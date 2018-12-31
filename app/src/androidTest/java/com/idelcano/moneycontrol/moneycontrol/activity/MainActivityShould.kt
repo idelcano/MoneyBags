@@ -2,17 +2,30 @@ package com.idelcano.moneycontrol.moneycontrol.activity
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.action.GeneralClickAction
+import android.support.test.espresso.action.GeneralLocation
+import android.support.test.espresso.action.Press
+import android.support.test.espresso.action.Tap
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.idelcano.moneycontrol.moneycontrol.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.R
+import com.idelcano.moneycontrol.moneycontrol.data.database.DBController
+import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
+import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.*
+
+
+
+
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -23,15 +36,19 @@ import org.junit.runner.RunWith
 class MainActivityShould {
     @Rule
     @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    @Before
+    fun setup(){
+        DBController(InstrumentationRegistry.getTargetContext(), true).initDB()
+    }
 
-    @Test fun hasAActionButtonVisible() {
+    @Test fun `has_a_action_button_visible`() {
         onView(withId(R.id.fab))
                 .perform(click())
                 .check(matches(isDisplayed()))
     }
 
     @Test
-    fun openMoneyBagDialogWhenCLickOnAddBagAction() {
+    fun `open_money_bag_dialog_after_click_on_add_bag_action`() {
         onView(withId(R.id.fab))
                 .perform(click())
 
@@ -46,9 +63,46 @@ class MainActivityShould {
     }
 
     @Test
-    fun checkOnListviewANewMoneyBag() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.idelcano.moneycontrol.moneycontrol", appContext.packageName)
+    fun `has_visible_money_bag_in_listview_after_create`() {
+        //given
+        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
+            createdDate = Date(), iconUId = "iconpathtest", priority = 5)
+
+        onView(withId(R.id.fab))
+            .perform(click())
+        onView(withText(R.string.add))
+            .perform(click())
+
+        onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name));
+        pauseTestFor(500);
+        onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()));
+        pauseTestFor(500);
+
+        onView(withId(R.id.edit_date)).perform(click());
+        onView(withText("OK")).perform(click());
+
+        pauseTestFor(500);
+        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        pauseTestFor(500);
+        onView(withId(R.id.save)).perform(click())
+
+
+        val moneyBags : List<MoneyBag?> = MoneyBagRepository().getAll()
+        assertEquals(1, moneyBags.size)
+        val moneyBag : MoneyBag = moneyBags[0]!!
+        assertEquals(expectedMoneyBag.name, moneyBag.name)
+        assertEquals(expectedMoneyBag.amount, moneyBag.amount)
+        assertEquals(expectedMoneyBag.dateLimit.day, moneyBag.dateLimit.day)
+        assertEquals(expectedMoneyBag.dateLimit.month, moneyBag.dateLimit.month)
+        assertEquals(expectedMoneyBag.dateLimit.year, moneyBag.dateLimit.year)
+        assertEquals(expectedMoneyBag.priority, moneyBag.priority)
+    }
+
+    fun pauseTestFor(miliseconds:Long){
+        try {
+            Thread.sleep(miliseconds);
+        } catch (e : InterruptedException) {
+            e.printStackTrace();
+        }
     }
 }
