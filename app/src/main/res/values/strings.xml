@@ -10,5 +10,8 @@
     <string name="save">save</string>
     <string name="cancel">cancel</string>
     <string name="money_bag">Creating money bag</string>
+    <string name="name_error">Please introduce a name</string>
+    <string name="date_error">Please introduce a date</string>
+    <string name="amount_error">Please introduce the amount value</string>
 
 </resources>
