@@ -2,13 +2,14 @@ package com.idelcano.moneycontrol.moneycontrol
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagDialogFragment
-
 import kotlinx.android.synthetic.main.activity_main.*
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction(R.string.add, View.OnClickListener {
                         val ft = this@MainActivity.supportFragmentManager
                         val dialogFragment = MoneyBagDialogFragment()
-                        dialogFragment.show(ft, "MoneyBagDialogFragment")
+                        dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
                     }).show()
         }
     }
