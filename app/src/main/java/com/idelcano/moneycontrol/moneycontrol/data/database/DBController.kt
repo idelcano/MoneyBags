@@ -14,12 +14,12 @@ class DBController(context: Context, isTest: Boolean) {
             FlowManager.reset()
             databaseConfig = DatabaseConfig.inMemoryBuilder(
                 MoneyHelperDatabase::class.java
-            )
+            ).databaseName(MoneyHelperDatabase.NAME)
                 .build()
         } else {
             databaseConfig = DatabaseConfig.builder(
                 MoneyHelperDatabase::class.java
-            )
+            ).databaseName(MoneyHelperDatabase.NAME)
                 .build()
         }
     }
@@ -36,5 +36,9 @@ class DBController(context: Context, isTest: Boolean) {
                     .build()
             )
         }
+    }
+
+    fun destroy() {
+        FlowManager.destroy()
     }
 }

@@ -1,13 +1,19 @@
 package com.idelcano.moneycontrol.moneycontrol
 
 import android.app.Application
-import android.content.Context
 import com.idelcano.moneycontrol.moneycontrol.data.database.DBController
 
-class App(val context: Context) : Application() {
+class App() : Application() {
 
+    lateinit var dbController : DBController
     override fun onCreate() {
         super.onCreate()
-        DBController(this.context, false).initDB()
+        dbController = DBController(this, false)
+        dbController.initDB()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        dbController.destroy()
     }
 }
