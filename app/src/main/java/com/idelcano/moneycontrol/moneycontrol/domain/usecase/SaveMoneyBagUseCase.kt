@@ -10,7 +10,7 @@ class SaveMoneyBagUseCase (private val moneyBagRepository: MoneyBagRepository,
 
         fun execute(moneyBag : MoneyBag) {
             asyncExecute {
-                val moviesResult = moneyBagRepository.save(moneyBag)
+                moneyBagRepository.save(moneyBag)
 
                 uiExecute { moneyBag}
             }
