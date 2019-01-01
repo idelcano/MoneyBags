@@ -13,5 +13,7 @@
     <string name="name_error">Please introduce a name</string>
     <string name="date_error">Please introduce a date</string>
     <string name="amount_error">Please introduce the amount value</string>
+    <string name="header_text">"Number of MoneyBags %s"</string>
+    <string name="loading_list_text">Loading list</string>
 
 </resources>
