@@ -46,7 +46,7 @@ class MoneyBagDialogPresenter{
         val date : Date = parseFromUI(dateValue)
         val amount : Long = amountValue.toLong()
         val priority : Int = view!!.priority_seek_bar.progress+1
-        saveMoneyBagUseCase.execute(MoneyBag(name = name, dateLimit = date, amount = amount, createdDate = Date(), priority = priority, iconUId = ""))
+        saveMoneyBagUseCase.execute(MoneyBag(name = name, dateLimit = date, amount = amount, createdDate = Date(), priority = priority, iconPath = ""))
         close()
     }
 

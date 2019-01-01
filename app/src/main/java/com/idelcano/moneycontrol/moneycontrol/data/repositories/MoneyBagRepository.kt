@@ -56,6 +56,6 @@ class MoneyBagRepository : IMoneyBagRepository{
     private fun map(moneyBag: MoneyBag) : MoneyBagDB {
         return MoneyBagDB(moneyBag.uid,
             moneyBag.name, moneyBag.amount, moneyBag.dateLimit, moneyBag.createdDate,
-            moneyBag.iconUId, moneyBag.priority)
+            moneyBag.iconPath, moneyBag.priority)
     }
 }

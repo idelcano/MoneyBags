@@ -68,7 +68,7 @@ class MainActivityShould {
     }
 
     fun initMoneyBags(){
-        testMoneyBag = MoneyBag(name="name", amount=10, dateLimit = Date(), createdDate = Date(), iconUId = "fakeiconpath", priority = 1)
-        testMoneyBag2 = MoneyBag(name="name 2", amount=20, dateLimit = Date(), createdDate = Date(), iconUId = "fakeiconpath2", priority = 2)
+        testMoneyBag = MoneyBag(name="name", amount=10, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath", priority = 1)
+        testMoneyBag2 = MoneyBag(name="name 2", amount=20, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath2", priority = 2)
     }
 }

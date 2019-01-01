@@ -66,7 +66,7 @@ class MainActivityShould {
     fun `has_visible_money_bag_in_listview_after_create`() {
         //given
         var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconUId = "iconpathtest", priority = 5)
+            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
 
         onView(withId(R.id.fab))
             .perform(click())

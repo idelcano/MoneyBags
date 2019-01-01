@@ -22,7 +22,7 @@ class MoneyBagAdapter(val listener: (MoneyBag) -> Unit) :
         val moneyBag: MoneyBag = moneyBags[position]!!
 
         item_title.text = moneyBag.name
-        //item_image.setImageDrawable(moneyBag.iconUId)
+        //item_image.setImageDrawable(moneyBag.iconPath)
         item_amount.text = moneyBag.amount.toString()
         item_amount_result.text = "0"
         setOnClickListener { listener(moneyBag) }
