@@ -18,5 +18,8 @@
     <string name="add_quantity">Add new value</string>
     <string name="save_new_value">add new value</string>
     <string name="delete_money_bag">Delete money bag</string>
+    <string name="are_you_sure">Are you sure you want to delete this item?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

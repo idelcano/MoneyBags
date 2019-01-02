@@ -8,36 +8,43 @@
               android:padding="@dimen/dialog_padding"
               android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatTextView
-            android:inputType="textCapCharacters"
-            android:text="@string/add_quantity"
-            style="@style/AppDialogTextView"
-    />
-
-    <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            style="@style/AppDialogEdittextContainer">
-        <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_name"
+    <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:background="@drawable/border"
+                  android:layout_marginBottom="@dimen/dialog_padding"
+                  android:padding="@dimen/dialog_padding"
+                  android:orientation="vertical">
+        <android.support.v7.widget.AppCompatTextView
                 android:inputType="textCapCharacters"
-                style="@style/AppDialogEdittext"
-                android:hint="@string/name_hint"/>
-    </android.support.design.widget.TextInputLayout>
+                android:text="@string/add_quantity"
+                style="@style/AppDialogTextView"
+        />
 
-    <android.support.design.widget.TextInputLayout
-            style="@style/AppDialogEdittextContainer">
-        <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_amount"
-                style="@style/AppDialogEdittext"
-                android:inputType="number"
-                android:hint="@string/amount_hint"/>
-    </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                style="@style/AppDialogEdittextContainer">
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_name"
+                    android:inputType="textCapCharacters"
+                    style="@style/AppDialogEdittext"
+                    android:hint="@string/name_hint"/>
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-            android:id="@+id/save"
-            android:text="@string/save_new_value"
-            style="@style/AppDialogButton"/>
+        <android.support.design.widget.TextInputLayout
+                style="@style/AppDialogEdittextContainer">
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_amount"
+                    style="@style/AppDialogEdittext"
+                    android:inputType="number"
+                    android:hint="@string/amount_hint"/>
+        </android.support.design.widget.TextInputLayout>
 
+        <Button
+                android:id="@+id/save"
+                android:text="@string/save_new_value"
+                style="@style/AppDialogButton"/>
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
