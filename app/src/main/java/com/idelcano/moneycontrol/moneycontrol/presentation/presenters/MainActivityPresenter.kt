@@ -59,7 +59,7 @@ class MainActivityPresenter{
         val ft = view!!.supportFragmentManager
         val dialogFragment = MoneyBagEditorDialogFragment()
         val args = Bundle()
-        args.putSerializable(MoneyBag.javaClass.canonicalName, item)
+        args.putString(MoneyBag.javaClass.canonicalName, item.uid)
         dialogFragment.setArguments(args)
         dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
     }

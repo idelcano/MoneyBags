@@ -1,13 +1,12 @@
 package com.idelcano.moneycontrol.moneycontrol.domain.entity
 
 import com.idelcano.moneycontrol.moneycontrol.utils.DhisCodeGenerator
-import java.io.Serializable
 import java.util.*
 data class MoneyBag (val uid:String = DhisCodeGenerator.generateCode(),
                      val name:String, val amount:Long,
                      val dateLimit: Date, val createdDate:Date,
                      val iconPath:String, val priority:Int,
-                     var amountList: List<MoneyAmount> = ArrayList()): Serializable {
+                     var amountList: List<MoneyAmount> = ArrayList()) {
 
     companion object{
         const val MAXIMUN_RANGE = 5
