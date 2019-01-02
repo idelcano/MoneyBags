@@ -6,6 +6,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/view_money_bag_item"
             android:padding="2dp">
 
 
