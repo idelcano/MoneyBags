@@ -18,15 +18,17 @@ class MoneyBagDialogPresenter{
     }
 
     fun detachView() {
+        view?.fragmentManager?.findFragmentByTag(view?.TAG_DIALOG)?.let {
+            (it as DialogFragment).dismiss()
+        }
+        view?.onDetach()
         view = null
     }
 
     fun close() {
-        view!!.fragmentManager!!.findFragmentByTag(view!!.TAG_DIALOG)?.let {
-            (it as DialogFragment).dismiss()
-        }
         detachView()
     }
+
     fun saveMoneyBag() {
         val name : String = view!!.edit_name.text.toString()
         val dateValue : String = view!!.edit_date.text.toString()

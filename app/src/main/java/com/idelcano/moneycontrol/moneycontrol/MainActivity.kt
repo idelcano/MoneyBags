@@ -2,11 +2,13 @@ package com.idelcano.moneycontrol.moneycontrol
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
+import com.idelcano.moneycontrol.moneycontrol.fragments.BaseFragment
 import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
@@ -72,5 +74,21 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     override fun onDestroy() {
         presenter.detachView()
         super.onDestroy()
+    }
+
+    override fun onAttachFragment(fragment: Fragment?) {
+        super.onAttachFragment(fragment)
+        if (fragment is BaseFragment) {
+            fragment.setListener(mMyFragmentListener)
+        }
+    }
+
+    private val mMyFragmentListener = object : BaseFragment.Listener {
+        override fun onDetached(fragment: BaseFragment) {
+            if(fragment is (MoneyBagDialogFragment)){
+                presenter.loadData()
+            }
+            fragment.setListener(null)
+        }
     }
 }
