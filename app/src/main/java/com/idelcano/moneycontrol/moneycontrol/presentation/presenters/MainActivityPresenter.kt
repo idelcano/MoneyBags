@@ -12,6 +12,9 @@ class MainActivityPresenter{
     fun initPresenter(view : MainActivity, getMoneyBagListUseCase : GetMoneyBagsUseCase) {
         this.view = view
         this.getMoneyBagListUseCase = getMoneyBagListUseCase
+    }
+
+    fun loadData(){
         loadingMoneyBags()
         loadMoneyBags()
     }
