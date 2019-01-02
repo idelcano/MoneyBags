@@ -33,9 +33,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         fab.setOnClickListener { view ->
             Snackbar.make(view, R.string.create_money, Snackbar.LENGTH_LONG)
                 .setAction(R.string.add, View.OnClickListener {
-                    val ft = this@MainActivity.supportFragmentManager
-                    val dialogFragment = MoneyBagCreatorDialogFragment()
-                    dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
+                    presenter.openMoneyBagCreatorFragment()
                 }).show()
         }
     }

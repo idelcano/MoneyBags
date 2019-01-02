@@ -99,6 +99,35 @@ class MainActivityShould {
         onView(withText(expectedMoneyBag.name)).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun `has_visible_edit_money_bag_dialog_fragment_after_click_on_listview`() {
+        //given
+        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
+            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
+
+        onView(withId(R.id.fab))
+            .perform(click())
+        onView(withText(R.string.add))
+            .perform(click())
+
+        onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name));
+        pauseTestFor(500);
+        onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()));
+        pauseTestFor(500);
+
+        onView(withId(R.id.edit_date)).perform(click());
+        onView(withText("OK")).perform(click());
+
+        pauseTestFor(500);
+        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        pauseTestFor(500);
+        onView(withId(R.id.save)).perform(click())
+
+        onView(withText(expectedMoneyBag.name)).perform(click())
+
+        onView(withId(R.id.edit_money_bag_dialog)).check(matches(isDisplayed()))
+    }
+
     fun pauseTestFor(miliseconds:Long){
         try {
             Thread.sleep(miliseconds);

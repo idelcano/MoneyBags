@@ -1,8 +1,13 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
+import android.os.Bundle
 import com.idelcano.moneycontrol.moneycontrol.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
+import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagEditorDialogFragment
+
+
 
 
 class MainActivityPresenter{
@@ -41,7 +46,22 @@ class MainActivityPresenter{
     }
 
     fun onMoneyBagClicked(item: MoneyBag) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        openMoneyBagEditrFragment(item)
+    }
+
+    fun openMoneyBagCreatorFragment() {
+        val ft = view!!.supportFragmentManager
+        val dialogFragment = MoneyBagCreatorDialogFragment()
+        dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
+    }
+
+    fun openMoneyBagEditrFragment(item: MoneyBag) {
+        val ft = view!!.supportFragmentManager
+        val dialogFragment = MoneyBagEditorDialogFragment()
+        val args = Bundle()
+        args.putSerializable(MoneyBag.javaClass.canonicalName, item)
+        dialogFragment.setArguments(args)
+        dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
     }
 
     interface View {
