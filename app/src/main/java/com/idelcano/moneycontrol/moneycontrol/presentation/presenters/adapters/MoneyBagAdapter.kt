@@ -24,12 +24,12 @@ class MoneyBagAdapter(val listener: (MoneyBag) -> Unit) :
         item_title.text = moneyBag.name
         //item_image.setImageDrawable(moneyBag.iconPath)
         item_amount.text = moneyBag.amount.toString()
-        item_amount_result.text = "0"
+        item_amount_result.text = moneyBag.result()
         setOnClickListener { listener(moneyBag) }
     }
 
-    fun setMoneyBags (movies: List<MoneyBag?>){
-        this.moneyBags = movies
+    fun setMoneyBags (moneys: List<MoneyBag?>){
+        this.moneyBags = moneys
         this.notifyDataSetChanged()
     }
 
