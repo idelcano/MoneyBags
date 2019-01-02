@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private fun initializePresenter() {
         presenter.initPresenter(this, GetMoneyBagsUseCase(MoneyBagRepository(), CoroutinesExecutor()))
+        presenter.loadData()
     }
 
     override fun onDestroy() {
