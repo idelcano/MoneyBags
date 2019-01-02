@@ -55,7 +55,7 @@ class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPrese
         presenterCreator = MoneyBagCreatorDialogPresenter()
         presenterCreator.initPresenter(this, SaveMoneyBagUseCase(MoneyBagRepository(), CoroutinesExecutor()))
 
-        view.save.setOnClickListener { view ->
+        view.save_money_bag.setOnClickListener { view ->
             saveMoneyBag()
         }
 
