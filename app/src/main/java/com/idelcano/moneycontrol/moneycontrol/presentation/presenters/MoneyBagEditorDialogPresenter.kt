@@ -1,20 +1,30 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
 import android.support.v4.app.DialogFragment
+import com.idelcano.moneycontrol.moneycontrol.R
+import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
-import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyBagUseCase
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
-import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyAmountUseCase
+import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagEditorDialogFragment
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import java.util.*
 
 class MoneyBagEditorDialogPresenter{
-    lateinit var saveMoneyBagUseCase : SaveMoneyBagUseCase
-    var view : MoneyBagCreatorDialogFragment? = null
+    lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
+    lateinit var saveMoneyAmountUseCase: SaveMoneyAmountUseCase
+    lateinit var getMoneyBagUseCase : GetMoneyBagUseCase
+    lateinit var moneyBag: MoneyBag
+    var view : MoneyBagEditorDialogFragment? = null
 
-    fun initPresenter(view : MoneyBagCreatorDialogFragment, saveMoneyBagUseCase : SaveMoneyBagUseCase) {
+    fun initPresenter(view : MoneyBagEditorDialogFragment, deleteMoneyBagUseCase : DeleteMoneyBagUseCase,
+                      saveMoneyAmountUseCase : SaveMoneyAmountUseCase,
+                      getMoneyBagUseCase : GetMoneyBagUseCase) {
         this.view = view
-        this.saveMoneyBagUseCase = saveMoneyBagUseCase
+        this.deleteMoneyBagUseCase = deleteMoneyBagUseCase
+        this.saveMoneyAmountUseCase = saveMoneyAmountUseCase
+        this.getMoneyBagUseCase = getMoneyBagUseCase
     }
 
     fun detachView() {
@@ -29,9 +39,8 @@ class MoneyBagEditorDialogPresenter{
         detachView()
     }
 
-    fun saveMoneyBag() {
+    fun saveMoneyAmont() {
         val name : String = view!!.edit_name.text.toString()
-        val dateValue : String = view!!.edit_date.text.toString()
         val amountValue : String = view!!.edit_amount.text.toString()
         if(name.length==0) {
             view!!.showNameError()
@@ -41,30 +50,27 @@ class MoneyBagEditorDialogPresenter{
             view!!.showAmountError()
             return
         }
-        if(dateValue.length==0) {
-            view!!.showDateError()
-            return
-        }
-        val date : Date = parseFromUI(dateValue)
         val amount : Long = amountValue.toLong()
-        val priority : Int = view!!.priority_seek_bar.progress+1
-        saveMoneyBagUseCase.execute(MoneyBag(name = name, dateLimit = date, amount = amount,
-            createdDate = Date(), priority = priority, iconPath = ""))
+        saveMoneyAmountUseCase.execute(MoneyAmount(name = name, amount = amount,
+            moneyBagUid = moneyBag.uid, creationDate = Date()))
         close()
-    }
-
-    fun formatDateToUI(year : Int, month: Int, day : Int): String {
-        var calendar : Calendar = Calendar.getInstance()
-        calendar.set(year, month, day)
-        return DateParser().formatToUI(calendar.time)
-    }
-
-    fun parseFromUI(dateValue : String): Date {
-        return DateParser().parseFromUI(dateValue)
     }
 
     fun destroyView() {
         view = null
+    }
+
+    fun remove() {
+            view!!.showDialog(
+                (fun() {
+                    deleteMoneyBagUseCase.execute(moneyBag)
+                    close()
+                })
+                , R.string.are_you_sure)
+    }
+
+    fun loadMoneyBag(uid: String) {
+        getMoneyBagUseCase.execute (uid,  onResult = { moneyBag = it!! })
     }
 
     interface View {
@@ -77,5 +83,7 @@ class MoneyBagEditorDialogPresenter{
         fun cancel()
 
         fun remove()
+
+        fun showDialog(func: () -> Unit, are_you_sure: Int)
     }
 }
