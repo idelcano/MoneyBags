@@ -96,6 +96,7 @@ class MainActivityShould {
         assertEquals(expectedMoneyBag.dateLimit.month, moneyBag.dateLimit.month)
         assertEquals(expectedMoneyBag.dateLimit.year, moneyBag.dateLimit.year)
         assertEquals(expectedMoneyBag.priority, moneyBag.priority)
+        onView(withText(expectedMoneyBag.name)).check(matches(isDisplayed()))
     }
 
     fun pauseTestFor(miliseconds:Long){
