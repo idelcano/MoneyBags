@@ -2,10 +2,10 @@ package com.idelcano.moneycontrol.moneycontrol.data.repositories
 
 import com.idelcano.moneycontrol.moneycontrol.data.database.model.MoneyBagDB
 import com.idelcano.moneycontrol.moneycontrol.data.database.model.MoneyBagDB_Table
+import com.idelcano.moneycontrol.moneycontrol.data.mappers.MoneyAmountMapper
 import com.idelcano.moneycontrol.moneycontrol.domain.boundary.IMoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
-import com.raizlabs.android.dbflow.kotlinextensions.save
-import com.raizlabs.android.dbflow.sql.language.Delete
+import com.raizlabs.android.dbflow.sql.language.SQLite
 import com.raizlabs.android.dbflow.sql.language.Select
 
 
@@ -16,8 +16,9 @@ class MoneyBagRepository : IMoneyBagRepository{
     }
 
     override fun delete(moneyBag: MoneyBag) {
-        Delete().from(MoneyBagDB::class.java)
+        SQLite.delete(MoneyBagDB::class.java)
             .where(MoneyBagDB_Table.uid.`is`(moneyBag.uid))
+            .execute();
     }
 
     override fun get(uid: String) : MoneyBag? {
@@ -50,7 +51,7 @@ class MoneyBagRepository : IMoneyBagRepository{
             return null
         return MoneyBag(moneyBagDB.uid,
             moneyBagDB.name!!, moneyBagDB.amount!!, moneyBagDB.dateLimit!!, moneyBagDB.createdDate!!,
-            moneyBagDB.iconUId!!, moneyBagDB.priority!!)
+            moneyBagDB.iconUId!!, moneyBagDB.priority!!, MoneyAmountMapper().mapToList(moneyBagDB.amounts))
     }
 
     private fun map(moneyBag: MoneyBag) : MoneyBagDB {

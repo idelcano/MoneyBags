@@ -5,7 +5,8 @@ import java.util.*
 data class MoneyBag (val uid:String = DhisCodeGenerator.generateCode(),
                      val name:String, val amount:Long,
                      val dateLimit: Date, val createdDate:Date,
-                     val iconPath:String, val priority:Int){
+                     val iconPath:String, val priority:Int,
+                     var amountList: List<MoneyAmount> = ArrayList()){
 
     companion object{
         const val MAXIMUN_RANGE = 5
