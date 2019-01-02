@@ -10,16 +10,16 @@ import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
-import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyBagDialogPresenter
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyBagCreatorDialogPresenter
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.*
 import java.util.*
 
-class MoneyBagDialogFragment : BaseFragment(), MoneyBagDialogPresenter.View {
+class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPresenter.View {
 
-    lateinit var presenter : MoneyBagDialogPresenter
+    lateinit var presenterCreator : MoneyBagCreatorDialogPresenter
 
-    val TAG_DIALOG: String = "MoneyBagDialog"
+    val TAG_DIALOG: String = "MoneyBagCreatorDialog"
 
     override fun showNameError() {
         edit_name.setError(getString(R.string.name_error))
@@ -33,11 +33,11 @@ class MoneyBagDialogFragment : BaseFragment(), MoneyBagDialogPresenter.View {
         edit_amount.setError(getString(R.string.amount_error))
     }
     override fun cancel() {
-        presenter.close()
+        presenterCreator.close()
     }
 
     override fun saveMoneyBag() {
-        presenter.saveMoneyBag()
+        presenterCreator.saveMoneyBag()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,14 +46,14 @@ class MoneyBagDialogFragment : BaseFragment(), MoneyBagDialogPresenter.View {
     }
 
     override fun onDestroy() {
-        presenter.destroyView()
+        presenterCreator.destroyView()
         super.onDestroy()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view : View = inflater.inflate(R.layout.create_money_bag_dialog_layout, container, false)
-        presenter = MoneyBagDialogPresenter()
-        presenter.initPresenter(this, SaveMoneyBagUseCase(MoneyBagRepository(), CoroutinesExecutor()))
+        presenterCreator = MoneyBagCreatorDialogPresenter()
+        presenterCreator.initPresenter(this, SaveMoneyBagUseCase(MoneyBagRepository(), CoroutinesExecutor()))
 
         view.save.setOnClickListener { view ->
             saveMoneyBag()
@@ -70,7 +70,7 @@ class MoneyBagDialogFragment : BaseFragment(), MoneyBagDialogPresenter.View {
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            edit_date.setText(presenter.formatDateToUI(year, monthOfYear, dayOfMonth))
+            edit_date.setText(presenterCreator.formatDateToUI(year, monthOfYear, dayOfMonth))
         }, year, month, day)
 
         view.edit_date.setOnClickListener({

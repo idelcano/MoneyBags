@@ -3,16 +3,16 @@ package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 import android.support.v4.app.DialogFragment
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyBagUseCase
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import java.util.*
 
-class MoneyBagDialogPresenter{
+class MoneyBagCreatorDialogPresenter{
     lateinit var saveMoneyBagUseCase : SaveMoneyBagUseCase
-    var view : MoneyBagDialogFragment? = null
+    var view : MoneyBagCreatorDialogFragment? = null
 
-    fun initPresenter(view : MoneyBagDialogFragment, saveMoneyBagUseCase : SaveMoneyBagUseCase) {
+    fun initPresenter(view : MoneyBagCreatorDialogFragment, saveMoneyBagUseCase : SaveMoneyBagUseCase) {
         this.view = view
         this.saveMoneyBagUseCase = saveMoneyBagUseCase
     }

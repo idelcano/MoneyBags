@@ -9,7 +9,7 @@ import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagReposito
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.fragments.BaseFragment
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyBagAdapter
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
             Snackbar.make(view, R.string.create_money, Snackbar.LENGTH_LONG)
                 .setAction(R.string.add, View.OnClickListener {
                     val ft = this@MainActivity.supportFragmentManager
-                    val dialogFragment = MoneyBagDialogFragment()
+                    val dialogFragment = MoneyBagCreatorDialogFragment()
                     dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
                 }).show()
         }
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private val mMyFragmentListener = object : BaseFragment.Listener {
         override fun onDetached(fragment: BaseFragment) {
-            if(fragment is (MoneyBagDialogFragment)){
+            if(fragment is (MoneyBagCreatorDialogFragment)){
                 presenter.loadData()
             }
             fragment.setListener(null)
