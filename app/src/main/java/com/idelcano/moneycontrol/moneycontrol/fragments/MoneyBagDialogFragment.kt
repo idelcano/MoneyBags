@@ -15,7 +15,12 @@ import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.*
 import java.util.*
 
-class MoneyBagDialogFragment : DialogFragment(), MoneyBagDialogPresenter.View {
+class MoneyBagDialogFragment : BaseFragment(), MoneyBagDialogPresenter.View {
+
+    lateinit var presenter : MoneyBagDialogPresenter
+
+    val TAG_DIALOG: String = "MoneyBagDialog"
+
     override fun showNameError() {
         edit_name.setError(getString(R.string.name_error))
     }
@@ -27,11 +32,6 @@ class MoneyBagDialogFragment : DialogFragment(), MoneyBagDialogPresenter.View {
     override fun showAmountError() {
         edit_amount.setError(getString(R.string.amount_error))
     }
-
-    lateinit var presenter : MoneyBagDialogPresenter
-
-    val TAG_DIALOG: String = "MoneyBagDialog"
-
     override fun cancel() {
         presenter.close()
     }
@@ -50,10 +50,7 @@ class MoneyBagDialogFragment : DialogFragment(), MoneyBagDialogPresenter.View {
         super.onDestroy()
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Do all the stuff to initialize your custom view
-
         var view : View = inflater.inflate(R.layout.create_money_bag_dialog_layout, container, false)
         presenter = MoneyBagDialogPresenter()
         presenter.initPresenter(this, SaveMoneyBagUseCase(MoneyBagRepository(), CoroutinesExecutor()))
