@@ -46,7 +46,7 @@ class MoneyBagDialogFragment : BaseFragment(), MoneyBagDialogPresenter.View {
     }
 
     override fun onDestroy() {
-        presenter.detachView()
+        presenter.destroyView()
         super.onDestroy()
     }
 

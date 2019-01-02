@@ -22,7 +22,7 @@ class MoneyBagDialogPresenter{
             (it as DialogFragment).dismiss()
         }
         view?.onDetach()
-        view = null
+        destroyView()
     }
 
     fun close() {
@@ -60,6 +60,10 @@ class MoneyBagDialogPresenter{
 
     fun parseFromUI(dateValue : String): Date {
         return DateParser().parseFromUI(dateValue)
+    }
+
+    fun destroyView() {
+        view = null
     }
 
     interface View {
