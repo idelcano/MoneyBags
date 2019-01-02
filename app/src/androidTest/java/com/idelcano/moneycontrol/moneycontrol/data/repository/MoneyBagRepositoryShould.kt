@@ -14,7 +14,7 @@ import java.util.*
 
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityShould {
+class MoneyBagRepositoryShould {
     lateinit var testMoneyBag : MoneyBag
     lateinit var testMoneyBag2 : MoneyBag
 
@@ -43,6 +43,8 @@ class MainActivityShould {
 
         //when
         val repository : IMoneyBagRepository = MoneyBagRepository()
+        //then
+        assertEquals(null, repository.get(uid = testMoneyBag2.uid))
         repository.save(testMoneyBag2);
         repository.delete(testMoneyBag2);
 
