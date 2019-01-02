@@ -25,6 +25,14 @@
         <item name="colorAccent">@color/blue</item>
         <item name="android:textColor">@color/bluetext</item>
     </style>
+    <style name="AppDialogTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:inputType">textUri</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="android:textColor">@color/bluetext</item>
+    </style>
 
     <style name="AppDialogEdittextContainer">
         <item name="android:layout_width">match_parent</item>

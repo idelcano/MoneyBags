@@ -15,5 +15,8 @@
     <string name="amount_error">Please introduce the amount value</string>
     <string name="header_text">"Number of MoneyBags %s"</string>
     <string name="loading_list_text">Loading list</string>
+    <string name="add_quantity">Add new value</string>
+    <string name="save_new_value">add new value</string>
+    <string name="delete_money_bag">Delete money bag</string>
 
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/background_dialog"
+              android:padding="@dimen/dialog_padding"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+            android:inputType="textCapCharacters"
+            android:text="@string/add_quantity"
+            style="@style/AppDialogTextView"
+    />
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            style="@style/AppDialogEdittextContainer">
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_name"
+                android:inputType="textCapCharacters"
+                style="@style/AppDialogEdittext"
+                android:hint="@string/name_hint"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            style="@style/AppDialogEdittextContainer">
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_amount"
+                style="@style/AppDialogEdittext"
+                android:inputType="number"
+                android:hint="@string/amount_hint"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+            android:id="@+id/save"
+            android:text="@string/save_new_value"
+            style="@style/AppDialogButton"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="1">
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+            android:id="@+id/remove"
+            android:text="@string/delete_money_bag"
+            style="@style/AppDialogButton"/>
+
+    <Button
+            android:id="@+id/cancel"
+            android:text="@string/cancel"
+            style="@style/AppDialogButton"/>
+</LinearLayout>
