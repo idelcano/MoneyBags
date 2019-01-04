@@ -27,10 +27,27 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_border"
                     android:padding="2dp">
                 <TextView
                         android:id="@+id/item_title"
+                        android:layout_width="0dp"
+                        android:layout_weight="70"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
                         style="@style/ListRowFullItem"/>
+                <ImageView
+                        android:id="@+id/add_button"
+                        android:layout_width="0dp"
+                        android:layout_weight="15"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_outline_add_circle_outline_24px"/>
+                <ImageView
+                        android:id="@+id/log_button"
+                        android:layout_width="0dp"
+                        android:layout_weight="15"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_outline_receipt_24px"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
