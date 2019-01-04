@@ -1,4 +1,4 @@
-package com.idelcano.moneycontrol.moneycontrol.fragments
+package com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments
 
 import android.support.v4.app.DialogFragment
 

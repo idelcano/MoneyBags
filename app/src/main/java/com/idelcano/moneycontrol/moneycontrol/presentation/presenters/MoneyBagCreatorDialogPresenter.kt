@@ -3,7 +3,7 @@ package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 import android.support.v4.app.DialogFragment
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyBagUseCase
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import java.util.*

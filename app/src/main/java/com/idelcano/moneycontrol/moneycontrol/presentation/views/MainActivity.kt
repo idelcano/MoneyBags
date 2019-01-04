@@ -1,16 +1,17 @@
-package com.idelcano.moneycontrol.moneycontrol
+package com.idelcano.moneycontrol.moneycontrol.presentation.views
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
-import com.idelcano.moneycontrol.moneycontrol.fragments.BaseFragment
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagEditorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyBagAdapter

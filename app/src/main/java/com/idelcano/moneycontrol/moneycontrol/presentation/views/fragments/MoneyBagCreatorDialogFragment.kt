@@ -1,4 +1,4 @@
-package com.idelcano.moneycontrol.moneycontrol.fragments
+package com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle

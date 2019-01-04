@@ -7,7 +7,7 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyAmountUseCase
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagEditorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import java.util.*
 

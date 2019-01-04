@@ -12,7 +12,7 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.idelcano.moneycontrol.moneycontrol.MainActivity
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.database.DBController
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
@@ -36,7 +36,8 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 class MainActivityShould {
     @Rule
-    @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
+        MainActivity::class.java)
     @Before
     fun setup(){
         DBController(InstrumentationRegistry.getTargetContext(), true).initDB()

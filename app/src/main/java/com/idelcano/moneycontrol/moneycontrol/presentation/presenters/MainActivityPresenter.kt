@@ -1,11 +1,11 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
 import android.os.Bundle
-import com.idelcano.moneycontrol.moneycontrol.MainActivity
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagCreatorDialogFragment
-import com.idelcano.moneycontrol.moneycontrol.fragments.MoneyBagEditorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
 
 
 
