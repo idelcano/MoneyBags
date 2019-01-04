@@ -5,6 +5,7 @@ import com.idelcano.moneycontrol.moneycontrol.data.database.model.MoneyBagDB_Tab
 import com.idelcano.moneycontrol.moneycontrol.data.mappers.MoneyAmountMapper
 import com.idelcano.moneycontrol.moneycontrol.domain.boundary.IMoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.raizlabs.android.dbflow.sql.language.OrderBy
 import com.raizlabs.android.dbflow.sql.language.SQLite
 import com.raizlabs.android.dbflow.sql.language.Select
 
@@ -32,6 +33,7 @@ class MoneyBagRepository : IMoneyBagRepository{
     override fun getAll(): List<MoneyBag?> {
         val moneyBagDBs : List<MoneyBagDB?> = Select()
             .from(MoneyBagDB::class.java)
+            .orderBy(OrderBy.fromProperty(MoneyBagDB_Table.priority))
             .queryList()
         return mapToList(moneyBagDBs)
     }

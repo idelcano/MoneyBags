@@ -53,7 +53,7 @@ class MoneyBagRepositoryShould {
     }
 
     @Test
-    fun `recovery_all_the_money_bags_stored_in_local_source`() {
+    fun `recovery_all_the_money_bags_ordered_by_priority_stored_in_local_source`() {
         //given
         initMoneyBags()
 
@@ -65,8 +65,8 @@ class MoneyBagRepositoryShould {
         //then
         val list : List<MoneyBag?> = repository.getAll()
         assertEquals(2, list.size)
-        assertEquals(testMoneyBag, list.get(0))
-        assertEquals(testMoneyBag2, list.get(1))
+        assertEquals(testMoneyBag, list.get(1))
+        assertEquals(testMoneyBag2, list.get(0))
     }
 
     fun initMoneyBags(){
