@@ -84,6 +84,6 @@ class MoneyBagEditorDialogPresenter{
 
         fun remove()
 
-        fun showDialog(func: () -> Unit, are_you_sure: Int)
+        fun showDialog(func: () -> Unit, message: Int)
     }
 }
