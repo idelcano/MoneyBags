@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.view_money_bag.view.*
 
 
@@ -21,10 +22,12 @@ class MoneyBagAdapter(val listener: (MoneyBag) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
         val moneyBag: MoneyBag = moneyBags[position]!!
 
-        item_title.text = moneyBag.name
+        item_title.setText(moneyBag.name)
         //item_image.setImageDrawable(moneyBag.iconPath)
+        date.text = DateParser().formatToUI(moneyBag.dateLimit)
+        date_remaining.text = moneyBag.remainingTime().toString()
         item_amount.text = moneyBag.amount.toString()
-        item_amount_result.text = moneyBag.result()
+        item_amount_result.text = moneyBag.remainingMoney().toString()
         setOnClickListener { listener(moneyBag) }
     }
 
