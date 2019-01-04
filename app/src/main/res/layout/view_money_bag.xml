@@ -9,13 +9,14 @@
             android:id="@+id/view_money_bag_item"
             android:padding="2dp">
 
-
         <ImageView
                 android:id="@+id/item_image"
                 android:layout_weight="0.25"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" app:srcCompat="@drawable/ic_launcher_background"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher_background"/>
         <LinearLayout
                 android:layout_weight="0.75"
                 android:layout_width="0dp"
@@ -23,10 +24,37 @@
                 android:orientation="vertical"
                 android:padding="2dp">
 
-            <TextView
-                    android:id="@+id/item_title"
-                    style="@style/AppMoneyBagTitle"/>
-
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp">
+                <TextView
+                        android:id="@+id/item_title"
+                        style="@style/ListRowFullItem"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+                <TextView
+                        style="@style/ListRowLeftItemEmpty"/>
+                <TextView
+                        android:text="@string/remaining"
+                        style="@style/ListRowRightItemWithoutBackground"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+                <TextView
+                        android:id="@+id/date"
+                        style="@style/ListRowLeftItem"/>
+                <TextView
+                        android:id="@+id/date_remaining"
+                        style="@style/ListRowRightItem"/>
+            </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,10 +62,10 @@
                     android:padding="2dp">
                 <TextView
                         android:id="@+id/item_amount"
-                        style="@style/AppMoneyAmount"/>
+                        style="@style/ListRowLeftItem"/>
                 <TextView
                         android:id="@+id/item_amount_result"
-                        style="@style/AppMoneyAmountResult"/>
+                        style="@style/ListRowRightItem"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

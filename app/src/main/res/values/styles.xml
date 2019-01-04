@@ -21,7 +21,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:inputType">textUri</item>
+        <item name="android:inputType">textCapWords</item>
         <item name="colorAccent">@color/blue</item>
         <item name="android:textColor">@color/bluetext</item>
     </style>
@@ -34,13 +34,16 @@
         <item name="android:textColor">@color/bluetext</item>
     </style>
 
-    <style name="AppDialogEdittextContainer">
+    <style name="AppListViewTextContainer" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="AppDialogEdittextContainer" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="colorAccent">@color/blue</item>
     </style>
-
     <style name="AppDialogButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
@@ -48,56 +51,66 @@
         <item name="android:textColor">@color/bluetext</item>
         <item name="android:background">@color/green</item>
     </style>
-
     <style name="AppCardView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginRight">4dp</item>
         <item name="android:elevation">8dp</item>
         <item name="cardCornerRadius">8dp</item>
         <item name="android:textColor">@color/bluetext</item>
         <item name="android:background">@color/green</item>
     </style>
-
-    <style name="AppMoneyBagTitle" parent="@style/TextAppearance.AppCompat.Headline">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/bluetext</item>
-        <item name="android:background">@color/green</item>
+    <style name="ListRowLeftItemEmpty" parent="@style/TextAppearance.AppCompat.Headline">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">0.55</item>
+        <item name="android:gravity">center</item>
     </style>
-    <style name="AppMoneyAmount" parent="@style/TextAppearance.AppCompat.Headline">
+    <style name="ListRowFullItem" parent="@style/TextAppearance.AppCompat.Headline">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/bluetext</item>
-        <item name="android:background">@color/green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/rounded_border</item>
     </style>
-    <style name="AppMoneyAmountResult" parent="@style/TextAppearance.AppCompat.Headline">
-        <item name="android:layout_width">match_parent</item>
+    <style name="ListRowLeftItem" parent="@style/CommonRowItem">
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/bluetext</item>
-        <item name="android:background">@color/green</item>
+        <item name="android:layout_weight">0.55</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:background">@drawable/rounded_border</item>
     </style>
-    <style name="AppHeader" parent="@style/TextAppearance.AppCompat.Headline">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
+    <style name="ListRowRightItem" parent="@style/ListRowRightItemWithoutBackground">
+        <item name="android:background">@drawable/rounded_border</item>
+    </style>
+    <style name="CommonRowItem" parent="@style/TextAppearance.AppCompat.Headline">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:padding">4dp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/bluetext</item>
+    </style>
+    <style name="ListRowRightItemWithoutBackground" parent="@style/CommonRowItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.45</item>
+        <item name="android:layout_marginLeft">1dp</item>
+    </style>
+    <style name="AppHeader" parent="@style/CommonRowItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/blush</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>
