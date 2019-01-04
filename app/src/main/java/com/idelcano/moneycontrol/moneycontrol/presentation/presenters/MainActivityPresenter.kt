@@ -1,11 +1,13 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
 import android.os.Bundle
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountLogDialogFragment
 
 
 
@@ -45,8 +47,12 @@ class MainActivityPresenter{
         view = null
     }
 
-    fun onMoneyBagClicked(item: MoneyBag) {
-        openMoneyBagEditrFragment(item)
+    fun onAddButtonClicked(item: MoneyBag) {
+        openFragment(item, MoneyBagEditorDialogFragment(), MoneyBagEditorDialogFragment().TAG_DIALOG)
+    }
+
+    fun onLogButtonClicked(item: MoneyBag) {
+        openFragment(item, MoneyAmountLogDialogFragment(), MoneyAmountLogDialogFragment().TAG_DIALOG)
     }
 
     fun openMoneyBagCreatorFragment() {
@@ -55,13 +61,13 @@ class MainActivityPresenter{
         dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
     }
 
-    fun openMoneyBagEditrFragment(item: MoneyBag) {
+    fun openFragment(item: MoneyBag, fragment: BaseFragment, tag: String) {
         val ft = view!!.supportFragmentManager
-        val dialogFragment = MoneyBagEditorDialogFragment()
+        val dialogFragment = fragment
         val args = Bundle()
         args.putString(MoneyBag.javaClass.canonicalName, item.uid)
         dialogFragment.setArguments(args)
-        dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
+        dialogFragment.show(ft, tag)
     }
 
     interface View {

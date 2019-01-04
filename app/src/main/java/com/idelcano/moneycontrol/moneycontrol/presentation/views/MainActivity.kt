@@ -9,12 +9,12 @@ import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyBagAdapter
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
                 }).show()
         }
     }
+
     override fun showMoneyBags(moneyBags: List<MoneyBag?>) {
         adapter.setMoneyBags(moneyBags)
     }
@@ -61,9 +62,9 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     }
 
     private fun initializeRecyclerView() {
-        this.adapter = MoneyBagAdapter() { item ->
-            presenter.onMoneyBagClicked(item)
-        }
+        this.adapter = MoneyBagAdapter(
+            {item : MoneyBag -> presenter.onAddButtonClicked(item)},
+            {item : MoneyBag -> presenter.onLogButtonClicked(item)})
         recycler.adapter = adapter
     }
 
