@@ -4,8 +4,8 @@
     <string name="create_money">Create new money</string>
     <string name="add">add</string>
     <string name="name_hint">name</string>
-    <string name="amount_hint">amount</string>
-    <string name="limit_date_hint">limit date</string>
+    <string name="amount_hint">Amount</string>
+    <string name="limit_date_hint">Limit date</string>
     <string name="priority">priority</string>
     <string name="save">save</string>
     <string name="cancel">cancel</string>
@@ -21,6 +21,7 @@
     <string name="are_you_sure">Are you sure you want to delete this item?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="remaining">Remaining... </string>
+    <string name="remaining">Remaining days</string>
+    <string name="amount_remaining">Remaining amount</string>
 
 </resources>

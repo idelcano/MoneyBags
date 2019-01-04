@@ -36,12 +36,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="2dp">
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp">
                 <TextView
-                        style="@style/ListRowLeftItemEmpty"/>
+                        android:text="@string/limit_date_hint"
+                        style="@style/ListRowTitle"/>
                 <TextView
                         android:text="@string/remaining"
-                        style="@style/ListRowRightItemWithoutBackground"/>
+                        style="@style/ListRowTitle"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
@@ -54,6 +56,19 @@
                 <TextView
                         android:id="@+id/date_remaining"
                         style="@style/ListRowRightItem"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp">
+                <TextView
+                        android:text="@string/amount_hint"
+                        style="@style/ListRowTitle"/>
+                <TextView
+                        android:text="@string/amount_remaining"
+                        style="@style/ListRowTitle"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"

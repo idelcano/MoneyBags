@@ -11,7 +11,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="WideDialog" parent="Theme.AppCompat.Light.Dialog.MinWidth">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -63,12 +63,6 @@
         <item name="android:textColor">@color/bluetext</item>
         <item name="android:background">@color/green</item>
     </style>
-    <style name="ListRowLeftItemEmpty" parent="@style/TextAppearance.AppCompat.Headline">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">0.55</item>
-        <item name="android:gravity">center</item>
-    </style>
     <style name="ListRowFullItem" parent="@style/TextAppearance.AppCompat.Headline">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -82,30 +76,34 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/rounded_border</item>
     </style>
-    <style name="ListRowLeftItem" parent="@style/CommonRowItem">
+    <style name="ListRowTitle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">0.55</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">8dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/bluetext</item>
+    </style>
+    <style name="ListRowLeftItem" parent="@style/CommonRowItem">
         <item name="android:layout_marginRight">1dp</item>
         <item name="android:background">@drawable/rounded_border</item>
     </style>
-    <style name="ListRowRightItem" parent="@style/ListRowRightItemWithoutBackground">
+    <style name="ListRowRightItem" parent="@style/CommonRowItem">
+        <item name="android:layout_marginLeft">1dp</item>
         <item name="android:background">@drawable/rounded_border</item>
     </style>
     <style name="CommonRowItem" parent="@style/TextAppearance.AppCompat.Headline">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.5</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">12dp</item>
         <item name="android:padding">4dp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/bluetext</item>
-    </style>
-    <style name="ListRowRightItemWithoutBackground" parent="@style/CommonRowItem">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">0.45</item>
-        <item name="android:layout_marginLeft">1dp</item>
     </style>
     <style name="AppHeader" parent="@style/CommonRowItem">
         <item name="android:layout_width">match_parent</item>
