@@ -46,14 +46,6 @@
                 android:text="@string/save_new_value"
                 style="@style/AppDialogButton"/>
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_amounts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/green"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:spanCount="1">
-    </android.support.v7.widget.RecyclerView>
 
     <Button
             android:id="@+id/remove"
