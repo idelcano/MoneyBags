@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_main"
     android:orientation="vertical"
     android:background="@color/green"
-    tools:context=".MainActivity">
+    tools:context=".presentation.views.MainActivity">
 
     <TextView
             android:id="@+id/header_text"

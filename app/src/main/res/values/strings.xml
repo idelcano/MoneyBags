@@ -23,5 +23,6 @@
     <string name="no">No</string>
     <string name="remaining">Remaining days</string>
     <string name="amount_remaining">Remaining amount</string>
+    <string name="creation_date_hint">Creation date</string>
 
 </resources>
