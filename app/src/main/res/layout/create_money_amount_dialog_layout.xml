@@ -12,7 +12,6 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/border"
             android:layout_marginBottom="@dimen/dialog_padding"
             android:padding="@dimen/dialog_padding"
             android:orientation="vertical">
@@ -40,16 +39,12 @@
                     android:inputType="number"
                     android:hint="@string/amount_hint"/>
         </android.support.design.widget.TextInputLayout>
-
-        <Button
-                android:id="@+id/save_money_bag"
-                android:text="@string/save_new_value"
-                style="@style/AppDialogButton"/>
     </LinearLayout>
 
+
     <Button
-            android:id="@+id/remove_money_bag"
-            android:text="@string/delete_money_bag"
+            android:id="@+id/save_money_amount"
+            android:text="@string/save_new_value"
             style="@style/AppDialogButton"/>
 
     <Button

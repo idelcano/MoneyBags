@@ -32,7 +32,7 @@
                 <TextView
                         android:id="@+id/item_title"
                         android:layout_width="0dp"
-                        android:layout_weight="70"
+                        android:layout_weight="55"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         style="@style/ListRowFullItem"/>
@@ -48,6 +48,12 @@
                         android:layout_weight="15"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/ic_outline_receipt_24px"/>
+                <ImageView
+                        android:id="@+id/delete_button"
+                        android:layout_width="0dp"
+                        android:layout_weight="15"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_outline_clear_24px"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"

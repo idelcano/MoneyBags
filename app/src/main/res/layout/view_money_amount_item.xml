@@ -12,10 +12,20 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_border"
                     android:padding="2dp">
                 <TextView
                         android:id="@+id/amount_title"
+                        android:layout_width="0dp"
+                        android:layout_weight="85"
+                        android:layout_height="wrap_content"
                         style="@style/ListRowFullItem"/>
+                <ImageView
+                        android:id="@+id/delete_amount_button"
+                        android:layout_width="0dp"
+                        android:layout_weight="15"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_outline_clear_24px"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
