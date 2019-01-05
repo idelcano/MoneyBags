@@ -17,4 +17,9 @@ class MoneyAmountRepository : IMoneyAmountRepository {
         val moneyAmountDB : MoneyAmountDB = MoneyAmountMapper().map(moneyAmount)
         moneyAmountDB.save()
     }
+
+    override fun delete(moneyAmount: MoneyAmount) {
+        val moneyAmountDB : MoneyAmountDB = MoneyAmountMapper().map(moneyAmount)
+        moneyAmountDB.delete()
+    }
 }

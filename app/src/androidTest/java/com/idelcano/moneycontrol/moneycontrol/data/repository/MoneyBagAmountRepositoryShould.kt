@@ -78,6 +78,22 @@ class MoneyBagAmountRepositoryShould {
         assertEquals(2, bagRepository.get(testMoneyBag.uid)!!.amountList.size )
     }
 
+    @Test
+    fun `recovery_null_money_amount_after_delete_it_in_local_source`() {
+        //given
+        initMoneyAmounts()
+
+        //when
+        val bagRepository : IMoneyBagRepository = MoneyBagRepository()
+        bagRepository.save(testMoneyBag)
+        val repository : IMoneyAmountRepository = MoneyAmountRepository()
+        repository.save(testMoneyAmount)
+        repository.delete(testMoneyAmount)
+
+        //then
+        assertEquals(0, bagRepository.get(testMoneyBag.uid)!!.amountList.size )
+    }
+
     fun initMoneyAmounts(){
         testMoneyBag = MoneyBag(name="name", amount=35, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath", priority = 1)
 
