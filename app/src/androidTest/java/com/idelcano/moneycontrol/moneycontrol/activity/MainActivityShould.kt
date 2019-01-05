@@ -12,11 +12,11 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.database.DBController
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -125,7 +125,7 @@ class MainActivityShould {
         pauseTestFor(500);
         onView(withId(R.id.save_money_bag)).perform(click())
 
-        onView(withText(expectedMoneyBag.name)).perform(click())
+        onView(withId(R.id.add_button)).perform(click())
 
         onView(withId(R.id.edit_money_bag_dialog)).check(matches(isDisplayed()))
     }
@@ -155,8 +155,8 @@ class MainActivityShould {
         pauseTestFor(500);
         onView(withId(R.id.save_money_bag)).perform(click())
 
-        onView(withText(expectedMoneyBag.name)).perform(click())
-        onView(withId(R.id.remove)).perform(click())
+        onView(withId(R.id.add_button)).perform(click())
+        onView(withId(R.id.remove_money_bag)).perform(click())
         onView(withText(R.string.yes)).perform(click())
 
         onView(withId(R.id.edit_money_bag_dialog)).check(doesNotExist())
