@@ -48,12 +48,12 @@
     </LinearLayout>
 
     <Button
-            android:id="@+id/remove"
+            android:id="@+id/remove_money_bag"
             android:text="@string/delete_money_bag"
             style="@style/AppDialogButton"/>
 
     <Button
-            android:id="@+id/cancel"
+            android:id="@+id/cancel_edit_dialog"
             android:text="@string/cancel"
             style="@style/AppDialogButton"/>
 </LinearLayout>
