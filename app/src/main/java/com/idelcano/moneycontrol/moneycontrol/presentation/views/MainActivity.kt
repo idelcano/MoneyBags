@@ -13,8 +13,8 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesE
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyBagAdapter
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     private val mMyFragmentListener = object : BaseFragment.Listener {
         override fun onDetached(fragment: BaseFragment) {
             if(fragment is (MoneyBagCreatorDialogFragment)
-                || fragment is (MoneyBagEditorDialogFragment)){
+                || fragment is (MoneyAmountCreatorDialogFragment)){
                 presenter.loadData()
             }
             fragment.setListener(null)

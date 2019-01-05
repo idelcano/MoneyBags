@@ -5,9 +5,9 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountLogDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
 
 
 
@@ -48,7 +48,7 @@ class MainActivityPresenter{
     }
 
     fun onAddButtonClicked(item: MoneyBag) {
-        openFragment(item, MoneyBagEditorDialogFragment(), MoneyBagEditorDialogFragment().TAG_DIALOG)
+        openFragment(item, MoneyAmountCreatorDialogFragment(), MoneyAmountCreatorDialogFragment().TAG_DIALOG)
     }
 
     fun onLogButtonClicked(item: MoneyBag) {
