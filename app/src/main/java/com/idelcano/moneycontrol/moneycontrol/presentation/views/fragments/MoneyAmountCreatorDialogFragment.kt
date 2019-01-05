@@ -45,10 +45,6 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
             saveMoneyAmount()
         }
 
-        view.remove_money_bag.setOnClickListener { view ->
-            remove()
-        }
-
         view.cancel_edit_dialog.setOnClickListener { view ->
             cancel()
         }
@@ -83,16 +79,8 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
         presenter.close()
     }
 
-    override fun remove() {
-        presenter.remove()
-    }
-
     override fun saveMoneyAmount() {
         presenter.saveMoneyAmont()
-    }
-
-    override fun showDialog(func: () -> Unit, messageId: Int) {
-        super.showDialog(func, messageId)
     }
 
 }

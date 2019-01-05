@@ -1,7 +1,6 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
 import android.support.v4.app.DialogFragment
-import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
@@ -60,15 +59,6 @@ class MoneyAmountCreatorDialogPresenter{
         view = null
     }
 
-    fun remove() {
-            view!!.showDialog(
-                (fun() {
-                    deleteMoneyBagUseCase.execute(moneyBag)
-                    close()
-                })
-                , R.string.are_you_sure)
-    }
-
     fun loadMoneyBag(uid: String) {
         getMoneyBagUseCase.execute (uid,  onResult = { moneyBag = it!! })
     }
@@ -81,9 +71,5 @@ class MoneyAmountCreatorDialogPresenter{
         fun saveMoneyAmount()
 
         fun cancel()
-
-        fun remove()
-
-        fun showDialog(func: () -> Unit, message: Int)
     }
 }
