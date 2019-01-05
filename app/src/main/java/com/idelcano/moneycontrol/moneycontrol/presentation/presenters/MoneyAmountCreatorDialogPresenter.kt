@@ -7,18 +7,18 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyAmountUseCase
-import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagEditorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import java.util.*
 
-class MoneyBagEditorDialogPresenter{
+class MoneyAmountCreatorDialogPresenter{
     lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
     lateinit var saveMoneyAmountUseCase: SaveMoneyAmountUseCase
     lateinit var getMoneyBagUseCase : GetMoneyBagUseCase
     lateinit var moneyBag: MoneyBag
-    var view : MoneyBagEditorDialogFragment? = null
+    var view : MoneyAmountCreatorDialogFragment? = null
 
-    fun initPresenter(view : MoneyBagEditorDialogFragment, deleteMoneyBagUseCase : DeleteMoneyBagUseCase,
+    fun initPresenter(view : MoneyAmountCreatorDialogFragment, deleteMoneyBagUseCase : DeleteMoneyBagUseCase,
                       saveMoneyAmountUseCase : SaveMoneyAmountUseCase,
                       getMoneyBagUseCase : GetMoneyBagUseCase) {
         this.view = view
