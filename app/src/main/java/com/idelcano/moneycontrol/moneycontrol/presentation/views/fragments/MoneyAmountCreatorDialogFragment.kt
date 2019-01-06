@@ -80,7 +80,7 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
     }
 
     override fun saveMoneyAmount() {
-        presenter.saveMoneyAmont()
+        presenter.saveMoneyAmount()
     }
 
 }

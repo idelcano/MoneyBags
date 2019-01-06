@@ -38,7 +38,7 @@ class MoneyAmountCreatorDialogPresenter{
         detachView()
     }
 
-    fun saveMoneyAmont() {
+    fun saveMoneyAmount() {
         val name : String = view!!.edit_name.text.toString()
         val amountValue : String = view!!.edit_amount.text.toString()
         if(name.length==0) {

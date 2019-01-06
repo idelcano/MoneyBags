@@ -61,7 +61,7 @@
             android:text="@string/save"
             style="@style/AppDialogButton"/>
     <Button
-            android:id="@+id/cancel"
+            android:id="@+id/cancel_money_creator_dialog"
             android:text="@string/cancel"
             style="@style/AppDialogButton"/>
 </LinearLayout>
