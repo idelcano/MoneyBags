@@ -40,7 +40,7 @@ class MoneyAmountLogDialogPresenter{
             view!!.showDialog(
                 (fun() {
                     deleteMoneyAmountUseCase.execute(item)
-                    close()
+                    loadMoneyBag(item.moneyBagUid)
                 })
                 , R.string.are_you_sure)
     }

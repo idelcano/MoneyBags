@@ -263,7 +263,7 @@ class MainActivityShould {
 
         onView(withId(R.id.delete_amount_button)).perform(click())
 
-        onView(withText(R.string.yes)).perform(click());
+        onView(withText("Yes")).perform(click());
 
         onView(withText(expectedMoneyAmount.name))
             .check(doesNotExist())
