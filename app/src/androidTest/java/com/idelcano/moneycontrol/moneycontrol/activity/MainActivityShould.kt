@@ -68,8 +68,7 @@ class MainActivityShould {
     @Test
     fun `has_visible_money_bag_in_listview_after_create`() {
         //given
-        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
+        var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -105,8 +104,7 @@ class MainActivityShould {
     @Test
     fun `has_visible_edit_money_bag_dialog_fragment_after_click_on_add_button`() {
         //given
-        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
+        var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -139,8 +137,7 @@ class MainActivityShould {
     @Test
     fun `has_visible_log_money_amount_dialog_fragment_after_click_on_log_button`() {
         //given
-        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
+        var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -164,7 +161,7 @@ class MainActivityShould {
 
         onView(withId(R.id.log_money_bag_dialog)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.cancel)).perform(click())
+        onView(withId(R.id.cancel_money_log_dialog)).perform(click())
 
         onView(withText(expectedMoneyBag.name))
             .check(matches(isDisplayed()))
@@ -173,9 +170,8 @@ class MainActivityShould {
     @Test
     fun `has_visible_item_in_log_money_amount_dialog_fragment_after_create_it`() {
         //given
-        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
-        var expectedAmount : MoneyAmount = MoneyAmount(name = "testname", amount = 15, creationDate = Date(), moneyBagUid = expectedMoneyBag.uid)
+        var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
+        var expectedAmount: MoneyAmount = createExpectedAmount(expectedMoneyBag)
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -206,8 +202,6 @@ class MainActivityShould {
 
         onView(withId(R.id.save_money_amount)).perform(click());
 
-        onView(withId(R.id.cancel)).perform(click())
-
         onView(withText(expectedMoneyBag.name))
             .check(matches(isDisplayed()))
 
@@ -217,12 +211,17 @@ class MainActivityShould {
             .check(matches(isDisplayed()))
     }
 
+    private fun createExpectedAmount(expectedMoneyBag: MoneyBag): MoneyAmount {
+        var expectedAmount: MoneyAmount =
+            MoneyAmount(name = "testname", amount = 15, creationDate = Date(), moneyBagUid = expectedMoneyBag.uid)
+        return expectedAmount
+    }
+
     @Test
-    fun `hasnt_visible_item_in_log_money_amount_dialog_fragment_after_remove_it`() {
+    fun `havent_visible_item_in_log_money_amount_dialog_fragment_after_remove_it`() {
         //given
-        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
-        var expectedAmount : MoneyAmount = MoneyAmount(name = "testname", amount = 15, creationDate = Date(), moneyBagUid = expectedMoneyBag.uid)
+        var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
+        var expectedMoneyAmount: MoneyAmount = createExpectedAmount(expectedMoneyBag)
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -246,13 +245,13 @@ class MainActivityShould {
 
         onView(withId(R.id.log_money_bag_dialog)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.cancel)).perform(click())
+        onView(withId(R.id.cancel_money_log_dialog)).perform(click())
 
         onView(withId(R.id.add_button)).perform(click())
 
-        onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name));
+        onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyAmount.name));
         pauseTestFor(500);
-        onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()));
+        onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyAmount.amount.toString()));
         pauseTestFor(500);
 
         onView(withId(R.id.save_money_amount)).perform(click());
@@ -266,19 +265,14 @@ class MainActivityShould {
 
         onView(withText(R.string.yes)).perform(click());
 
-        onView(withText(expectedAmount.name))
-            .check(matches(isDisplayed()))
-
-        onView(withId(R.id.log_button)).perform(click())
-
-        onView(withText(expectedAmount.name)).check(doesNotExist())
+        onView(withText(expectedMoneyAmount.name))
+            .check(doesNotExist())
     }
 
     @Test
     fun `remove_money_bag_after_click_on_delete_button`() {
         //given
-        var expectedMoneyBag : MoneyBag = MoneyBag(name = "testname", amount = 15, dateLimit = Date(),
-            createdDate = Date(), iconPath = "iconpathtest", priority = 5)
+        var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -300,11 +294,17 @@ class MainActivityShould {
 
         onView(withId(R.id.delete_button)).perform(click())
 
-        onView(withText(R.string.yes)).perform(click())
+        onView(withText("Yes")).perform(click());
 
-        onView(withId(R.id.create_money_amount_dialog)).check(doesNotExist())
-        onView(withId(R.id.recycler)).check(matches(isDisplayed()))
-        onView(withId(R.id.view_money_bag_item)).check(doesNotExist())
+        onView(withText(expectedMoneyBag.name)).check(doesNotExist())
+    }
+
+    private fun createExpectedMoneyBag(): MoneyBag {
+        var expectedMoneyBag: MoneyBag = MoneyBag(
+            name = "testname", amount = 15, dateLimit = Date(),
+            createdDate = Date(), iconPath = "iconpathtest", priority = 5
+        )
+        return expectedMoneyBag
     }
 
     fun pauseTestFor(miliseconds:Long){
