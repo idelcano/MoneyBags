@@ -10,7 +10,9 @@ import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.view_money_bag.view.*
 
 
-class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit, val loglistener: (MoneyBag) -> Unit) :
+class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit,
+                      val loglistener: (MoneyBag) -> Unit,
+                      val removelistener: (MoneyBag) -> Unit) :
     RecyclerView.Adapter<MoneyBagAdapter.ViewHolder>() {
 
     private var moneyBags: List<MoneyBag?> = ArrayList()
@@ -31,6 +33,7 @@ class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit, val loglistener: (Mon
 
         add_button.setOnClickListener { addlistener(moneyBag) }
         log_button.setOnClickListener { loglistener(moneyBag) }
+        delete_button.setOnClickListener { removelistener(moneyBag) }
     }
 
     fun setMoneyBags (moneys: List<MoneyBag?>){

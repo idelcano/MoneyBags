@@ -10,7 +10,7 @@
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_amount_bags"
                 android:background="@drawable/border"
-                android:layout_above="@+id/cancel"
+                android:layout_above="@+id/cancel_money_log_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
@@ -22,7 +22,7 @@
 
     <Button
             android:layout_alignParentBottom="true"
-            android:id="@+id/cancel"
+            android:id="@+id/cancel_money_log_dialog"
             android:text="@string/cancel"
             style="@style/AppDialogButton"/>
 </RelativeLayout>

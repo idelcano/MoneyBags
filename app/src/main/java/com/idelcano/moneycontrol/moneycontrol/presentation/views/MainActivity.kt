@@ -1,5 +1,7 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.views
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -8,6 +10,7 @@ import android.view.View
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
@@ -64,12 +67,17 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     private fun initializeRecyclerView() {
         this.adapter = MoneyBagAdapter(
             {item : MoneyBag -> presenter.onAddButtonClicked(item)},
-            {item : MoneyBag -> presenter.onLogButtonClicked(item)})
+            {item : MoneyBag -> presenter.onLogButtonClicked(item)},
+            {item : MoneyBag -> presenter.onRemoveButtonClicked(item)})
         recycler.adapter = adapter
     }
 
     private fun initializePresenter() {
-        presenter.initPresenter(this, GetMoneyBagsUseCase(MoneyBagRepository(), CoroutinesExecutor()))
+        var coroutinesExecutor = CoroutinesExecutor()
+        presenter.initPresenter(this,
+            GetMoneyBagsUseCase(MoneyBagRepository(), coroutinesExecutor),
+            DeleteMoneyBagUseCase(MoneyBagRepository(), coroutinesExecutor)
+            )
         presenter.loadData()
     }
 
@@ -82,6 +90,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         super.onAttachFragment(fragment)
         if (fragment is BaseFragment) {
             fragment.setListener(mMyFragmentListener)
+            fragment.addDialogCreatorFun(dialogCreator)
         }
     }
 
@@ -93,5 +102,42 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
             }
             fragment.setListener(null)
         }
+    }
+
+    open fun showDialog(func: () -> Unit, messageId: Int) {
+        dialogCreator(func, messageId)
+    }
+
+    val dialogCreator = fun (func: () -> Unit, messageId: Int) {
+        lateinit var dialog: AlertDialog
+
+        val builder = AlertDialog.Builder(this)
+
+        // Set a messageId for alert dialog
+        builder.setMessage(messageId)
+
+        // On click listener for dialog buttons
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE -> {
+                    func()
+                    dialog.dismiss()
+                }
+                DialogInterface.BUTTON_NEGATIVE -> dialog.dismiss()
+            }
+        }
+
+        // Set the alert dialog positive/yes button
+        builder.setPositiveButton(R.string.yes, dialogClickListener)
+
+        // Set the alert dialog negative/no button
+        builder.setNegativeButton(R.string.no, dialogClickListener)
+
+
+        // Initialize the AlertDialog using builder object
+        dialog = builder.create()
+
+        // Finally, display the alert dialog
+        dialog.show()
     }
 }

@@ -1,7 +1,9 @@
 package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
 import android.os.Bundle
+import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
@@ -14,11 +16,13 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.Money
 
 class MainActivityPresenter{
     lateinit var getMoneyBagListUseCase : GetMoneyBagsUseCase
+    lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
     var view : MainActivity? = null
 
-    fun initPresenter(view : MainActivity, getMoneyBagListUseCase : GetMoneyBagsUseCase) {
+    fun initPresenter(view : MainActivity, getMoneyBagListUseCase : GetMoneyBagsUseCase, deleteMoneyBagUseCase: DeleteMoneyBagUseCase) {
         this.view = view
         this.getMoneyBagListUseCase = getMoneyBagListUseCase
+        this.deleteMoneyBagUseCase = deleteMoneyBagUseCase
     }
 
     fun loadData(){
@@ -53,6 +57,18 @@ class MainActivityPresenter{
 
     fun onLogButtonClicked(item: MoneyBag) {
         openFragment(item, MoneyAmountLogDialogFragment(), MoneyAmountLogDialogFragment().TAG_DIALOG)
+    }
+    fun onRemoveButtonClicked(item: MoneyBag) {
+        removeMoneyBag(item)
+    }
+
+    private fun removeMoneyBag(item: MoneyBag) {
+        view!!.showDialog(
+            (fun() {
+                deleteMoneyBagUseCase.execute(item)
+                loadMoneyBags()
+            })
+            , R.string.are_you_sure)
     }
 
     fun openMoneyBagCreatorFragment() {

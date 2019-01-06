@@ -59,7 +59,7 @@ class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPrese
             saveMoneyBag()
         }
 
-        view.cancel.setOnClickListener { view ->
+        view.cancel_money_creator_dialog.setOnClickListener { view ->
             cancel()
         }
         setCancelable(false)
