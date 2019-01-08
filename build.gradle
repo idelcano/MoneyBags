@@ -15,6 +15,10 @@ buildscript {
     }
 }
 
+configurations {
+    ktlint
+}
+
 allprojects {
     repositories {
         google()

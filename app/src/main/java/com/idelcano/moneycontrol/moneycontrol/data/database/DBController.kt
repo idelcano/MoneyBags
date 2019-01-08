@@ -6,8 +6,8 @@ import com.raizlabs.android.dbflow.config.FlowConfig
 import com.raizlabs.android.dbflow.config.FlowManager
 
 class DBController(context: Context, isTest: Boolean) {
-    val context : Context = context
-    val databaseConfig : DatabaseConfig
+    val context: Context = context
+    val databaseConfig: DatabaseConfig
 
     init {
         if (isTest) {

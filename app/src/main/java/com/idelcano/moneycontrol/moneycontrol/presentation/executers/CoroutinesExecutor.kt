@@ -6,17 +6,16 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
-class CoroutinesExecutor: Executor {
-    override fun uiExecute(uiFun:suspend ()->Unit) {
+class CoroutinesExecutor : Executor {
+    override fun uiExecute(uiFun: suspend () -> Unit) {
         launch(UI) {
             uiFun()
         }
     }
 
-    override fun asyncExecute(asyncFun:suspend()->Unit) {
+    override fun asyncExecute(asyncFun: suspend() -> Unit) {
         async(CommonPool) {
             asyncFun()
         }
     }
-
 }

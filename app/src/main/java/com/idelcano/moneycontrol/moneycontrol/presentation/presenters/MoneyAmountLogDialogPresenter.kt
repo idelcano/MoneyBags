@@ -7,14 +7,16 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyAmountUs
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountLogDialogFragment
 
-class MoneyAmountLogDialogPresenter{
-    lateinit var getMoneyBagUseCase : GetMoneyBagUseCase
-    lateinit var deleteMoneyAmountUseCase : DeleteMoneyAmountUseCase
-    var view : MoneyAmountLogDialogFragment? = null
+class MoneyAmountLogDialogPresenter {
+    lateinit var getMoneyBagUseCase: GetMoneyBagUseCase
+    lateinit var deleteMoneyAmountUseCase: DeleteMoneyAmountUseCase
+    var view: MoneyAmountLogDialogFragment? = null
 
-    fun initPresenter(view : MoneyAmountLogDialogFragment,
-                      getMoneyBagUseCase : GetMoneyBagUseCase,
-                      deleteMoneyAmountUseCase : DeleteMoneyAmountUseCase) {
+    fun initPresenter(
+        view: MoneyAmountLogDialogFragment,
+        getMoneyBagUseCase: GetMoneyBagUseCase,
+        deleteMoneyAmountUseCase: DeleteMoneyAmountUseCase
+    ) {
         this.view = view
         this.getMoneyBagUseCase = getMoneyBagUseCase
         this.deleteMoneyAmountUseCase = deleteMoneyAmountUseCase
@@ -36,17 +38,16 @@ class MoneyAmountLogDialogPresenter{
         view = null
     }
 
-    fun remove(item : MoneyAmount) {
+    fun remove(item: MoneyAmount) {
             view!!.showDialog(
                 (fun() {
                     deleteMoneyAmountUseCase.execute(item)
                     loadMoneyBag(item.moneyBagUid)
-                })
-                , R.string.are_you_sure)
+                }), R.string.are_you_sure)
     }
 
     fun loadMoneyBag(uid: String) {
-        getMoneyBagUseCase.execute (uid,  onResult = {
+        getMoneyBagUseCase.execute(uid, onResult = {
             view!!.showMoneyAmounts(it!!.amountList)
         })
     }

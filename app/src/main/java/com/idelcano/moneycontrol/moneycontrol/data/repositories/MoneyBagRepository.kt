@@ -9,21 +9,20 @@ import com.raizlabs.android.dbflow.sql.language.OrderBy
 import com.raizlabs.android.dbflow.sql.language.SQLite
 import com.raizlabs.android.dbflow.sql.language.Select
 
-
-class MoneyBagRepository : IMoneyBagRepository{
+class MoneyBagRepository : IMoneyBagRepository {
     override fun save(moneyBag: MoneyBag) {
-        val moneyBagDB : MoneyBagDB = map(moneyBag)
+        val moneyBagDB: MoneyBagDB = map(moneyBag)
         moneyBagDB.save()
     }
 
     override fun delete(moneyBag: MoneyBag) {
         SQLite.delete(MoneyBagDB::class.java)
             .where(MoneyBagDB_Table.uid.`is`(moneyBag.uid))
-            .execute();
+            .execute()
     }
 
-    override fun get(uid: String) : MoneyBag? {
-        var moneyBagDB : MoneyBagDB? = Select()
+    override fun get(uid: String): MoneyBag? {
+        var moneyBagDB: MoneyBagDB? = Select()
             .from(MoneyBagDB::class.java)
             .where(MoneyBagDB_Table.uid.`is`(uid))
             .querySingle()
@@ -31,7 +30,7 @@ class MoneyBagRepository : IMoneyBagRepository{
     }
 
     override fun getAll(): List<MoneyBag?> {
-        val moneyBagDBs : List<MoneyBagDB?> = Select()
+        val moneyBagDBs: List<MoneyBagDB?> = Select()
             .from(MoneyBagDB::class.java)
             .orderBy(OrderBy.fromProperty(MoneyBagDB_Table.priority))
             .queryList()
@@ -49,14 +48,14 @@ class MoneyBagRepository : IMoneyBagRepository{
     }
 
     private fun mapFromDB(moneyBagDB: MoneyBagDB?): MoneyBag? {
-        if(moneyBagDB == null)
+        if (moneyBagDB == null)
             return null
         return MoneyBag(moneyBagDB.uid,
             moneyBagDB.name!!, moneyBagDB.amount!!, moneyBagDB.dateLimit!!, moneyBagDB.createdDate!!,
             moneyBagDB.iconUId!!, moneyBagDB.priority!!, MoneyAmountMapper().mapToList(moneyBagDB.amounts))
     }
 
-    private fun map(moneyBag: MoneyBag) : MoneyBagDB {
+    private fun map(moneyBag: MoneyBag): MoneyBagDB {
         return MoneyBagDB(moneyBag.uid,
             moneyBag.name, moneyBag.amount, moneyBag.dateLimit, moneyBag.createdDate,
             moneyBag.iconPath, moneyBag.priority)

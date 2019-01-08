@@ -4,11 +4,12 @@ import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagReposito
 import com.idelcano.moneycontrol.moneycontrol.domain.boundary.Executor
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 
+class GetMoneyBagUseCase(
+    private val moneyBagRepository: MoneyBagRepository,
+    private val executor: Executor
+) : UseCase(executor) {
 
-class GetMoneyBagUseCase (private val moneyBagRepository: MoneyBagRepository,
-                           private val executor: Executor): UseCase(executor) {
-
-        fun execute(uid : String, onResult: (MoneyBag?) -> Unit) {
+        fun execute(uid: String, onResult: (MoneyBag?) -> Unit) {
             asyncExecute {
                 val moneyBag = moneyBagRepository.get(uid)
 
