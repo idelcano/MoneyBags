@@ -7,8 +7,9 @@ android:
   - tools
   - platform-tools
   - build-tools-26.0.2
-  - android-26
-  - sys-img-x86-android-26
+  - android-28
+  - android-22
+  - sys-img-x86-android-22
 env:
 before_script:
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
