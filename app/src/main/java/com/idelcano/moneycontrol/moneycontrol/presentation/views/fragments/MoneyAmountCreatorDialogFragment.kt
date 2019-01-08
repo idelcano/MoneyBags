@@ -24,13 +24,13 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.create_money_amount_dialog_layout, container, false)
         presenter = MoneyAmountCreatorDialogPresenter()
         val coroutinesExecutor = CoroutinesExecutor()
-        val uid : String = getArguments()!!.getString(MoneyBag.javaClass.canonicalName)
+        val uid: String = getArguments()!!.getString(MoneyBag.javaClass.canonicalName)
 
         presenter.initPresenter(this,
             DeleteMoneyBagUseCase(MoneyBagRepository(), coroutinesExecutor),
@@ -39,7 +39,6 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
             )
 
         presenter.loadMoneyBag(uid)
-
 
         view.save_money_amount.setOnClickListener { view ->
             saveMoneyAmount()
@@ -82,5 +81,4 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
     override fun saveMoneyAmount() {
         presenter.saveMoneyAmount()
     }
-
 }

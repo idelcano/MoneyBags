@@ -21,11 +21,10 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.Money
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-
 class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
-    var presenter : MainActivityPresenter = MainActivityPresenter()
-    lateinit var adapter : MoneyBagAdapter
+    var presenter: MainActivityPresenter = MainActivityPresenter()
+    lateinit var adapter: MoneyBagAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     override fun showLoading() {
         progress_bar.visibility = View.VISIBLE
-        header_text.text =getString(R.string.loading_list_text);
+        header_text.text = getString(R.string.loading_list_text)
     }
 
     override fun hideLoading() {
@@ -61,14 +60,14 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     }
 
     override fun showTotalMoneyBags(count: Int) {
-        header_text.text =  String.format(getString(R.string.header_text),count)
+        header_text.text = String.format(getString(R.string.header_text), count)
     }
 
     private fun initializeRecyclerView() {
         this.adapter = MoneyBagAdapter(
-            {item : MoneyBag -> presenter.onAddButtonClicked(item)},
-            {item : MoneyBag -> presenter.onLogButtonClicked(item)},
-            {item : MoneyBag -> presenter.onRemoveButtonClicked(item)})
+            { item: MoneyBag -> presenter.onAddButtonClicked(item) },
+            { item: MoneyBag -> presenter.onLogButtonClicked(item) },
+            { item: MoneyBag -> presenter.onRemoveButtonClicked(item) })
         recycler.adapter = adapter
     }
 
@@ -96,8 +95,8 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private val mMyFragmentListener = object : BaseFragment.Listener {
         override fun onDetached(fragment: BaseFragment) {
-            if(fragment is (MoneyBagCreatorDialogFragment)
-                || fragment is (MoneyAmountCreatorDialogFragment)){
+            if (fragment is (MoneyBagCreatorDialogFragment) ||
+                fragment is (MoneyAmountCreatorDialogFragment)) {
                 presenter.loadData()
             }
             fragment.setListener(null)
@@ -132,7 +131,6 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
         // Set the alert dialog negative/no button
         builder.setNegativeButton(R.string.no, dialogClickListener)
-
 
         // Initialize the AlertDialog using builder object
         dialog = builder.create()

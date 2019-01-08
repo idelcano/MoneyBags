@@ -3,7 +3,7 @@ package com.idelcano.moneycontrol.moneycontrol.utils
 import java.security.SecureRandom
 import java.util.regex.Pattern
 
-//Class copied from Dhis2 SDK
+// Class copied from Dhis2 SDK
 object DhisCodeGenerator {
 
     private val CODE_PATTERN = Pattern.compile("^[a-zA-Z]{1}[a-zA-Z0-9]{10}$")

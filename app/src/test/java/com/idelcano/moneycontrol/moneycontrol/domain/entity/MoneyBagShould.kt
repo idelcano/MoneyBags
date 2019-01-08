@@ -4,25 +4,22 @@ import org.junit.Assert
 import org.junit.Test
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
-import java.util.*
 
+import java.util.Date
 
-
-
-val uid:String = "Uid"
-val name:String = "Name"
-val amount:Long = 10L
+val uid: String = "Uid"
+val name: String = "Name"
+val amount: Long = 10L
 val dateLimit: Date = Date()
 val createdDate: Date = Date()
-val iconPath:String = "iconPath"
-
+val iconPath: String = "iconPath"
 
 class MoneyBagShould {
 
     @Test
     fun `return correct uid when create new money bag without uid`() {
         val moneyBag: MoneyBag
-        moneyBag = MoneyBag(name= name, amount = amount, dateLimit = dateLimit, createdDate = createdDate, iconPath = iconPath, priority = 0)
+        moneyBag = MoneyBag(name = name, amount = amount, dateLimit = dateLimit, createdDate = createdDate, iconPath = iconPath, priority = 0)
         Assert.assertTrue(moneyBag.uid.length>0)
     }
 
@@ -56,9 +53,9 @@ class MoneyBagShould {
         val todayLocalDateMinusOneDay = date.minus(1, ChronoUnit.DAYS)
         val dateAsDate = Date.from(todayLocalDateMinusOneDay.atStartOfDay(ZoneId.systemDefault()).toInstant())
 
-        val moneyBag = MoneyBag(name= name, amount = amount, dateLimit = dateAsDate, createdDate = createdDate, iconPath = iconPath, priority = 0)
+        val moneyBag = MoneyBag(name = name, amount = amount, dateLimit = dateAsDate, createdDate = createdDate, iconPath = iconPath, priority = 0)
 
-        Assert.assertTrue(moneyBag.remainingTime()==-1)
+        Assert.assertTrue(moneyBag.remainingTime() == -1)
     }
 
     @Test
@@ -67,9 +64,9 @@ class MoneyBagShould {
         val todayLocalDateMinusOneDay = date.plus(1, ChronoUnit.DAYS)
         val dateAsDate = Date.from(todayLocalDateMinusOneDay.atStartOfDay(ZoneId.systemDefault()).toInstant())
 
-        val moneyBag = MoneyBag(name= name, amount = amount, dateLimit = dateAsDate, createdDate = createdDate, iconPath = iconPath, priority = 0)
+        val moneyBag = MoneyBag(name = name, amount = amount, dateLimit = dateAsDate, createdDate = createdDate, iconPath = iconPath, priority = 0)
 
-        Assert.assertTrue(moneyBag.remainingTime()==1)
+        Assert.assertTrue(moneyBag.remainingTime() == 1)
     }
 
     @Test
@@ -77,36 +74,36 @@ class MoneyBagShould {
         val date = Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
         val dateAsDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())
 
-        val moneyBag = MoneyBag(name= name, amount = amount, dateLimit = dateAsDate, createdDate = createdDate, iconPath = iconPath, priority = 0)
+        val moneyBag = MoneyBag(name = name, amount = amount, dateLimit = dateAsDate, createdDate = createdDate, iconPath = iconPath, priority = 0)
 
-        Assert.assertTrue(moneyBag.remainingTime()==0)
+        Assert.assertTrue(moneyBag.remainingTime() == 0)
     }
 
     @Test
     fun `return remaining money -1 when the amount is 1 minus 2`() {
         val moneyAmountBags: MutableList<MoneyAmount> = ArrayList()
-        moneyAmountBags.add(MoneyAmount(name= "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
-        moneyAmountBags.add(MoneyAmount(name= "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
-        val moneyBag = MoneyBag(uid="uid", name= name, amount = 1, dateLimit = Date(), createdDate = createdDate, iconPath = iconPath, priority = 0, amountList = moneyAmountBags)
+        moneyAmountBags.add(MoneyAmount(name = "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
+        moneyAmountBags.add(MoneyAmount(name = "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
+        val moneyBag = MoneyBag(uid = "uid", name = name, amount = 1, dateLimit = Date(), createdDate = createdDate, iconPath = iconPath, priority = 0, amountList = moneyAmountBags)
 
-        Assert.assertTrue(moneyBag.remainingMoney()==-1L)
+        Assert.assertTrue(moneyBag.remainingMoney() == -1L)
     }
 
     @Test
     fun `return remaining money 0 when the amount is 1 minus 1`() {
         val moneyAmountBags: MutableList<MoneyAmount> = ArrayList()
-        moneyAmountBags.add(MoneyAmount(name= "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
-        val moneyBag = MoneyBag(uid="uid", name= name, amount = 1, dateLimit = Date(), createdDate = createdDate, iconPath = iconPath, priority = 0, amountList = moneyAmountBags)
+        moneyAmountBags.add(MoneyAmount(name = "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
+        val moneyBag = MoneyBag(uid = "uid", name = name, amount = 1, dateLimit = Date(), createdDate = createdDate, iconPath = iconPath, priority = 0, amountList = moneyAmountBags)
 
-        Assert.assertTrue(moneyBag.remainingMoney()==0L)
+        Assert.assertTrue(moneyBag.remainingMoney() == 0L)
     }
 
     @Test
     fun `return remaining money 1 when the amount is 2 minus 1`() {
         val moneyAmountBags: MutableList<MoneyAmount> = ArrayList()
-        moneyAmountBags.add(MoneyAmount(name= "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
-        val moneyBag = MoneyBag(uid="uid", name= name, amount = 2, dateLimit = Date(), createdDate = createdDate, iconPath = iconPath, priority = 0, amountList = moneyAmountBags)
+        moneyAmountBags.add(MoneyAmount(name = "name", amount = 1, creationDate = Date(), moneyBagUid = "uid"))
+        val moneyBag = MoneyBag(uid = "uid", name = name, amount = 2, dateLimit = Date(), createdDate = createdDate, iconPath = iconPath, priority = 0, amountList = moneyAmountBags)
 
-        Assert.assertTrue(moneyBag.remainingMoney()==1L)
+        Assert.assertTrue(moneyBag.remainingMoney() == 1L)
     }
 }

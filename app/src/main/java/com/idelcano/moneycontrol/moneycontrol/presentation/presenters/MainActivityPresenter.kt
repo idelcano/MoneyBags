@@ -11,21 +11,18 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.Money
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountLogDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
 
-
-
-
-class MainActivityPresenter{
-    lateinit var getMoneyBagListUseCase : GetMoneyBagsUseCase
+class MainActivityPresenter {
+    lateinit var getMoneyBagListUseCase: GetMoneyBagsUseCase
     lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
-    var view : MainActivity? = null
+    var view: MainActivity? = null
 
-    fun initPresenter(view : MainActivity, getMoneyBagListUseCase : GetMoneyBagsUseCase, deleteMoneyBagUseCase: DeleteMoneyBagUseCase) {
+    fun initPresenter(view: MainActivity, getMoneyBagListUseCase: GetMoneyBagsUseCase, deleteMoneyBagUseCase: DeleteMoneyBagUseCase) {
         this.view = view
         this.getMoneyBagListUseCase = getMoneyBagListUseCase
         this.deleteMoneyBagUseCase = deleteMoneyBagUseCase
     }
 
-    fun loadData(){
+    fun loadData() {
         loadingMoneyBags()
         loadMoneyBags()
     }
@@ -67,8 +64,7 @@ class MainActivityPresenter{
             (fun() {
                 deleteMoneyBagUseCase.execute(item)
                 loadMoneyBags()
-            })
-            , R.string.are_you_sure)
+            }), R.string.are_you_sure)
     }
 
     fun openMoneyBagCreatorFragment() {

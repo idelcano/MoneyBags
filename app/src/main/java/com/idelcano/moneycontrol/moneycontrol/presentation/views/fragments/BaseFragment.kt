@@ -2,10 +2,9 @@ package com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments
 
 import android.support.v4.app.DialogFragment
 
-
 open class BaseFragment : DialogFragment() {
 
-    private lateinit var dialogCreator : (func:() -> Unit, message:Int) -> Unit
+    private lateinit var dialogCreator: (func: () -> Unit, message: Int) -> Unit
     private var mListener: Listener? = null
 
     fun setListener(listener: Listener?) {
@@ -24,7 +23,7 @@ open class BaseFragment : DialogFragment() {
         }
     }
 
-    fun addDialogCreatorFun(dialogCreator: (func:() -> Unit, message:Int) -> Unit) {
+    fun addDialogCreatorFun(dialogCreator: (func: () -> Unit, message: Int) -> Unit) {
         this.dialogCreator = dialogCreator
     }
 

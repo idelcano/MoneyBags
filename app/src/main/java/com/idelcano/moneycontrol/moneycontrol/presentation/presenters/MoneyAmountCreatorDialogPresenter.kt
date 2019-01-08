@@ -8,18 +8,21 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyAmountUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
-import java.util.*
+import java.util.Date
 
-class MoneyAmountCreatorDialogPresenter{
+class MoneyAmountCreatorDialogPresenter {
     lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
     lateinit var saveMoneyAmountUseCase: SaveMoneyAmountUseCase
-    lateinit var getMoneyBagUseCase : GetMoneyBagUseCase
+    lateinit var getMoneyBagUseCase: GetMoneyBagUseCase
     lateinit var moneyBag: MoneyBag
-    var view : MoneyAmountCreatorDialogFragment? = null
+    var view: MoneyAmountCreatorDialogFragment? = null
 
-    fun initPresenter(view : MoneyAmountCreatorDialogFragment, deleteMoneyBagUseCase : DeleteMoneyBagUseCase,
-                      saveMoneyAmountUseCase : SaveMoneyAmountUseCase,
-                      getMoneyBagUseCase : GetMoneyBagUseCase) {
+    fun initPresenter(
+        view: MoneyAmountCreatorDialogFragment,
+        deleteMoneyBagUseCase: DeleteMoneyBagUseCase,
+        saveMoneyAmountUseCase: SaveMoneyAmountUseCase,
+        getMoneyBagUseCase: GetMoneyBagUseCase
+    ) {
         this.view = view
         this.deleteMoneyBagUseCase = deleteMoneyBagUseCase
         this.saveMoneyAmountUseCase = saveMoneyAmountUseCase
@@ -39,17 +42,17 @@ class MoneyAmountCreatorDialogPresenter{
     }
 
     fun saveMoneyAmount() {
-        val name : String = view!!.edit_name.text.toString()
-        val amountValue : String = view!!.edit_amount.text.toString()
-        if(name.length==0) {
+        val name: String = view!!.edit_name.text.toString()
+        val amountValue: String = view!!.edit_amount.text.toString()
+        if (name.length == 0) {
             view!!.showNameError()
             return
         }
-        if(amountValue.length==0) {
+        if (amountValue.length == 0) {
             view!!.showAmountError()
             return
         }
-        val amount : Long = amountValue.toLong()
+        val amount: Long = amountValue.toLong()
         saveMoneyAmountUseCase.execute(MoneyAmount(name = name, amount = amount,
             moneyBagUid = moneyBag.uid, creationDate = Date()))
         close()
@@ -60,7 +63,7 @@ class MoneyAmountCreatorDialogPresenter{
     }
 
     fun loadMoneyBag(uid: String) {
-        getMoneyBagUseCase.execute (uid,  onResult = { moneyBag = it!! })
+        getMoneyBagUseCase.execute(uid, onResult = { moneyBag = it!! })
     }
 
     interface View {
