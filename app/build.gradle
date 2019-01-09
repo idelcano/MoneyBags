@@ -98,7 +98,7 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
 detekt {
     version = "1.0.0-RC8"
     defaultProfile {
-        config = "detekt.yml"
+        config = "$projectDir/detekt.yml"
         input = file("src/main/java")
         filters = ".*/resources/.*,.*/build/.*"
     }

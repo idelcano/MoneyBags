@@ -32,6 +32,7 @@ before_script:
 - adb shell input keyevent 82
 script:
 - "./gradlew --no-daemon clean installDebug"
+- "mv app/detekt.ym ."
 - "./gradlew --no-daemon detektCheck "
 - "./gradlew --no-daemon ktlint"
 - "./gradlew --no-daemon testDebugUnitTest"
