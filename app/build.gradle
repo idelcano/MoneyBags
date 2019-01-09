@@ -11,8 +11,6 @@ apply plugin: 'kotlin-kapt' // only required for kotlin consumers.
 
 apply plugin: 'io.gitlab.arturbosch.detekt'
 
-apply plugin: 'io.gitlab.arturbosch.detekt'
-
 def dbflow_version = "4.2.4"
 
 configurations {
