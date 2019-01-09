@@ -23,7 +23,7 @@ class MoneyAmountLogDialogFragment : BaseFragment(), MoneyAmountLogDialogPresent
     lateinit var adapter: MoneyAmountAdapter
 
     companion object {
-        const val TAG_DIALOG : String = "MoneyAmountLogDialog"
+        const val TAG_DIALOG: String = "MoneyAmountLogDialog"
     }
 
     var companion = Companion

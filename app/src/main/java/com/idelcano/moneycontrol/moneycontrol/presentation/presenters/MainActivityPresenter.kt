@@ -65,8 +65,7 @@ class MainActivityPresenter {
         view!!.showDialog({
                 deleteMoneyBagUseCase.execute(item)
                 loadMoneyBags()
-            }
-            , R.string.are_you_sure)
+            }, R.string.are_you_sure)
     }
 
     fun openMoneyBagCreatorFragment() {

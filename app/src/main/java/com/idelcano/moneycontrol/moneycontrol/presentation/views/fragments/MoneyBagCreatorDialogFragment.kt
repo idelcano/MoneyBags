@@ -26,7 +26,7 @@ class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPrese
     lateinit var presenterCreator: MoneyBagCreatorDialogPresenter
 
     companion object {
-        const val TAG_DIALOG : String = "MoneyBagCreatorDialog"
+        const val TAG_DIALOG: String = "MoneyBagCreatorDialog"
     }
 
     var companion = Companion
