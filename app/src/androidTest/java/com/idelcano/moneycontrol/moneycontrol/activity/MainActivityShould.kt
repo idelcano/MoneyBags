@@ -36,7 +36,7 @@ import java.util.Date
  */
 @RunWith(AndroidJUnit4::class)
 class MainActivityShould {
-    val delay: Int = 500
+    val delay: Long = 500
     @Rule
     @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
         MainActivity::class.java)
