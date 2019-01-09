@@ -18,8 +18,10 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.M
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.activity_main.fab
+import kotlinx.android.synthetic.main.content_main.header_text
+import kotlinx.android.synthetic.main.content_main.progress_bar
+import kotlinx.android.synthetic.main.content_main.recycler
 
 class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
@@ -108,7 +110,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     }
 
     val dialogCreator = fun (func: () -> Unit, messageId: Int) {
-        lateinit var dialog: AlertDialog
+        var dialog: AlertDialog? = null
 
         val builder = AlertDialog.Builder(this)
 
@@ -120,9 +122,9 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     func()
-                    dialog.dismiss()
+                    dialog!!.dismiss()
                 }
-                DialogInterface.BUTTON_NEGATIVE -> dialog.dismiss()
+                DialogInterface.BUTTON_NEGATIVE -> dialog!!.dismiss()
             }
         }
 

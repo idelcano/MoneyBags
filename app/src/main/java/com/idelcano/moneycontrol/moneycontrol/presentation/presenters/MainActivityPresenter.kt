@@ -61,7 +61,7 @@ class MainActivityPresenter {
 
     private fun removeMoneyBag(item: MoneyBag) {
         view!!.showDialog(
-            (fun() {
+            (fun () {
                 deleteMoneyBagUseCase.execute(item)
                 loadMoneyBags()
             }), R.string.are_you_sure)

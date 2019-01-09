@@ -7,6 +7,7 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.Money
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
 import java.util.Date
+import java.util.Calendar
 
 class MoneyBagCreatorDialogPresenter {
     lateinit var saveMoneyBagUseCase: SaveMoneyBagUseCase
