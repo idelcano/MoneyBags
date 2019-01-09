@@ -41,7 +41,7 @@ class MoneyBagAmountRepositoryShould {
         // then
         var moneyBag: MoneyBag? = bagRepository.get(uid = testMoneyBag.uid)
         moneyBag!!.amountList
-        assertEquals(2, moneyBag!!.amountList!!.size)
+        assertEquals(2, moneyBag.amountList.size)
     }
 
     @Test
