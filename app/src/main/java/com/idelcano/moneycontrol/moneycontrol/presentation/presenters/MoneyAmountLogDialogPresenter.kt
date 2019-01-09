@@ -23,7 +23,7 @@ class MoneyAmountLogDialogPresenter {
     }
 
     fun detachView() {
-        view?.fragmentManager?.findFragmentByTag(view?.TAG_DIALOG)?.let {
+        view?.fragmentManager?.findFragmentByTag(view?.companion?.TAG_DIALOG)?.let {
             (it as DialogFragment).dismiss()
         }
         view?.onDetach()
@@ -40,7 +40,7 @@ class MoneyAmountLogDialogPresenter {
 
     fun remove(item: MoneyAmount) {
             view!!.showDialog(
-                (fun() {
+                ({
                     deleteMoneyAmountUseCase.execute(item)
                     loadMoneyBag(item.moneyBagUid)
                 }), R.string.are_you_sure)

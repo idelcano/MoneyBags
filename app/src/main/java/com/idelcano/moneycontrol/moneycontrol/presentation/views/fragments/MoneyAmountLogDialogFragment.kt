@@ -15,13 +15,18 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyAmountLogDialogPresenter
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyAmountAdapter
-import kotlinx.android.synthetic.main.money_bag_log_dialog.view.*
+import kotlinx.android.synthetic.main.money_bag_log_dialog.view.cancel_money_log_dialog
+import kotlinx.android.synthetic.main.money_bag_log_dialog.view.recycler_amount_bags
 
 class MoneyAmountLogDialogFragment : BaseFragment(), MoneyAmountLogDialogPresenter.View {
     lateinit var presenter: MoneyAmountLogDialogPresenter
     lateinit var adapter: MoneyAmountAdapter
 
-    val TAG_DIALOG: String = "MoneyAmountLogDialog"
+    companion object {
+        const val TAG_DIALOG : String = "MoneyAmountLogDialog"
+    }
+
+    var companion = Companion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
