@@ -9,7 +9,6 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.view_money_amount_item.view.*
 
-
 class MoneyAmountAdapter(val listener: (MoneyAmount) -> Unit) :
     RecyclerView.Adapter<MoneyAmountAdapter.ViewHolder>() {
 
@@ -28,7 +27,7 @@ class MoneyAmountAdapter(val listener: (MoneyAmount) -> Unit) :
         delete_amount_button.setOnClickListener { listener(moneyAmount) }
     }
 
-    fun setMoneyAmounts (moneyAmounts: List<MoneyAmount?>){
+    fun setMoneyAmounts(moneyAmounts: List<MoneyAmount?>) {
         this.moneyAmounts = moneyAmounts
         this.notifyDataSetChanged()
     }
@@ -40,9 +39,7 @@ class MoneyAmountAdapter(val listener: (MoneyAmount) -> Unit) :
 
     override fun getItemCount() = moneyAmounts.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    }
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     fun ViewGroup.inflate(layoutRes: Int): View {
         return LayoutInflater.from(this.context).inflate(layoutRes, this, false)

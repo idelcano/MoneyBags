@@ -9,10 +9,11 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import kotlinx.android.synthetic.main.view_money_bag.view.*
 
-
-class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit,
-                      val loglistener: (MoneyBag) -> Unit,
-                      val removelistener: (MoneyBag) -> Unit) :
+class MoneyBagAdapter(
+    val addlistener: (MoneyBag) -> Unit,
+    val loglistener: (MoneyBag) -> Unit,
+    val removelistener: (MoneyBag) -> Unit
+) :
     RecyclerView.Adapter<MoneyBagAdapter.ViewHolder>() {
 
     private var moneyBags: List<MoneyBag?> = ArrayList()
@@ -25,7 +26,7 @@ class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit,
         val moneyBag: MoneyBag = moneyBags[position]!!
 
         item_title.setText(moneyBag.name)
-        //item_image.setImageDrawable(moneyBag.iconPath)
+        // item_image.setImageDrawable(moneyBag.iconPath)
         date.text = DateParser().formatToUI(moneyBag.dateLimit)
         date_remaining.text = moneyBag.remainingTime().toString()
         item_amount.text = moneyBag.amount.toString()
@@ -36,7 +37,7 @@ class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit,
         delete_button.setOnClickListener { removelistener(moneyBag) }
     }
 
-    fun setMoneyBags (moneys: List<MoneyBag?>){
+    fun setMoneyBags(moneys: List<MoneyBag?>) {
         this.moneyBags = moneys
         this.notifyDataSetChanged()
     }
@@ -48,9 +49,7 @@ class MoneyBagAdapter(val addlistener: (MoneyBag) -> Unit,
 
     override fun getItemCount() = moneyBags.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    }
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     fun ViewGroup.inflate(layoutRes: Int): View {
         return LayoutInflater.from(this.context).inflate(layoutRes, this, false)

@@ -14,23 +14,31 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyAmountUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyAmountCreatorDialogPresenter
-import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.*
-import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.*
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_amount
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_name
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.cancel_edit_dialog
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.edit_amount
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.edit_name
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.save_money_amount
 
 class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialogPresenter.View {
     lateinit var presenter: MoneyAmountCreatorDialogPresenter
 
-    val TAG_DIALOG: String = "MoneyBagEditorDialog"
+    companion object {
+        const val TAG_DIALOG: String = "MoneyAmountCreator"
+    }
+
+    var companion = Companion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.create_money_amount_dialog_layout, container, false)
         presenter = MoneyAmountCreatorDialogPresenter()
         val coroutinesExecutor = CoroutinesExecutor()
-        val uid : String = getArguments()!!.getString(MoneyBag.javaClass.canonicalName)
+        val uid: String = getArguments()!!.getString(MoneyBag.javaClass.canonicalName)
 
         presenter.initPresenter(this,
             DeleteMoneyBagUseCase(MoneyBagRepository(), coroutinesExecutor),
@@ -39,7 +47,6 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
             )
 
         presenter.loadMoneyBag(uid)
-
 
         view.save_money_amount.setOnClickListener { view ->
             saveMoneyAmount()
@@ -82,5 +89,4 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
     override fun saveMoneyAmount() {
         presenter.saveMoneyAmount()
     }
-
 }

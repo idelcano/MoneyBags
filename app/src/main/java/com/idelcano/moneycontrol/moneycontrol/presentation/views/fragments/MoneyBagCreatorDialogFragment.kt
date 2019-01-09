@@ -11,15 +11,25 @@ import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagReposito
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyBagCreatorDialogPresenter
-import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
-import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.*
-import java.util.*
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.edit_amount
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.edit_date
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.edit_name
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.cancel_money_creator_dialog
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.edit_amount
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.edit_date
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.edit_name
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.view.save_money_bag
+import java.util.Calendar
 
 class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPresenter.View {
 
-    lateinit var presenterCreator : MoneyBagCreatorDialogPresenter
+    lateinit var presenterCreator: MoneyBagCreatorDialogPresenter
 
-    val TAG_DIALOG: String = "MoneyBagCreatorDialog"
+    companion object {
+        const val TAG_DIALOG: String = "MoneyBagCreatorDialog"
+    }
+
+    var companion = Companion
 
     override fun showNameError() {
         edit_name.setError(getString(R.string.name_error))
@@ -42,7 +52,7 @@ class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPrese
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog)
     }
 
     override fun onDestroy() {
@@ -51,7 +61,7 @@ class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPrese
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view : View = inflater.inflate(R.layout.create_money_bag_dialog_layout, container, false)
+        var view: View = inflater.inflate(R.layout.create_money_bag_dialog_layout, container, false)
         presenterCreator = MoneyBagCreatorDialogPresenter()
         presenterCreator.initPresenter(this, SaveMoneyBagUseCase(MoneyBagRepository(), CoroutinesExecutor()))
 

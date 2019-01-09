@@ -4,15 +4,16 @@ import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagReposito
 import com.idelcano.moneycontrol.moneycontrol.domain.boundary.Executor
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 
+class SaveMoneyBagUseCase(
+    private val moneyBagRepository: MoneyBagRepository,
+    private val executor: Executor
+) : UseCase(executor) {
 
-class SaveMoneyBagUseCase (private val moneyBagRepository: MoneyBagRepository,
-    private val executor: Executor): UseCase(executor) {
-
-        fun execute(moneyBag : MoneyBag) {
+        fun execute(moneyBag: MoneyBag) {
             asyncExecute {
                 moneyBagRepository.save(moneyBag)
 
-                uiExecute { moneyBag}
+                uiExecute { moneyBag }
             }
         }
     }

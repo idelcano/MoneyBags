@@ -1,17 +1,16 @@
 package com.idelcano.moneycontrol.moneycontrol.utils
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
+class DateParser {
+    val format: String = "dd/MM/yyyy"
 
-class DateParser{
-    val format : String = "dd/MM/yyyy"
-
-    fun formatToUI(date : Date) : String{
+    fun formatToUI(date: Date): String {
         val format = SimpleDateFormat(format)
         return format.format(date)
     }
-    fun parseFromUI(dateValue : String) : Date {
+    fun parseFromUI(dateValue: String): Date {
         return SimpleDateFormat(format).parse(dateValue)
     }
 }

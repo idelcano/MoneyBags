@@ -1,3 +1,6 @@
+plugins {
+    id 'io.gitlab.arturbosch.detekt'
+}
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -6,7 +9,13 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt' // only required for kotlin consumers.
 
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
 def dbflow_version = "4.2.4"
+
+configurations {
+    ktlint
+}
 
 android {
     compileSdkVersion 28
@@ -27,8 +36,9 @@ android {
 }
 
 dependencies {
+    ktlint 'com.github.shyiko:ktlint:0.29.0'
+    detekt 'io.gitlab.arturbosch.detekt:detekt-cli:1.0.0-RC12'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.16"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.16"
@@ -54,4 +64,42 @@ dependencies {
     // kotlin extensions
     implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${dbflow_version}@aar"
 
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        apiVersion = '1.1'
+        languageVersion = '1.1'
+    }
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/shyiko/ktlint#usage for more
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "-F", "src/**/*.kt"
+}
+
+detekt {
+    version = "1.0.0-RC8"
+    defaultProfile {
+        config = "detekt.yml"
+        input = file("src/main/java")
+        filters = ".*/resources/.*,.*/build/.*"
+    }
 }

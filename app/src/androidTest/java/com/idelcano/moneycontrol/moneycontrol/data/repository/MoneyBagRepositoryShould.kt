@@ -10,67 +10,66 @@ import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
-
+import java.util.Date
 
 @RunWith(AndroidJUnit4::class)
 class MoneyBagRepositoryShould {
-    lateinit var testMoneyBag : MoneyBag
-    lateinit var testMoneyBag2 : MoneyBag
+    lateinit var testMoneyBag: MoneyBag
+    lateinit var testMoneyBag2: MoneyBag
 
     @Before
-    fun setup(){
+    fun setup() {
         DBController(InstrumentationRegistry.getTargetContext(), true).initDB()
     }
 
     @Test
     fun `persist_money_bag_in_local_source`() {
-        //given
+        // given
         initMoneyBags()
 
-        //when
-        val repository : IMoneyBagRepository = MoneyBagRepository()
-        repository.save(testMoneyBag);
+        // when
+        val repository: IMoneyBagRepository = MoneyBagRepository()
+        repository.save(testMoneyBag)
 
-        //then
+        // then
         assertEquals(testMoneyBag, repository.get(uid = testMoneyBag.uid))
     }
 
     @Test
     fun `return_a_null_money_bag_after_save_and_delete_it_on_database`() {
-        //given
+        // given
         initMoneyBags()
 
-        //when
-        val repository : IMoneyBagRepository = MoneyBagRepository()
-        //then
+        // when
+        val repository: IMoneyBagRepository = MoneyBagRepository()
+        // then
         assertEquals(null, repository.get(uid = testMoneyBag2.uid))
-        repository.save(testMoneyBag2);
-        repository.delete(testMoneyBag2);
+        repository.save(testMoneyBag2)
+        repository.delete(testMoneyBag2)
 
-        //then
+        // then
         assertEquals(null, repository.get(uid = testMoneyBag2.uid))
     }
 
     @Test
     fun `recovery_all_the_money_bags_ordered_by_priority_stored_in_local_source`() {
-        //given
+        // given
         initMoneyBags()
 
-        //when
-        val repository : IMoneyBagRepository = MoneyBagRepository()
-        repository.save(testMoneyBag);
-        repository.save(testMoneyBag2);
+        // when
+        val repository: IMoneyBagRepository = MoneyBagRepository()
+        repository.save(testMoneyBag)
+        repository.save(testMoneyBag2)
 
-        //then
-        val list : List<MoneyBag?> = repository.getAll()
+        // then
+        val list: List<MoneyBag?> = repository.getAll()
         assertEquals(2, list.size)
         assertEquals(testMoneyBag, list.get(1))
         assertEquals(testMoneyBag2, list.get(0))
     }
 
-    fun initMoneyBags(){
-        testMoneyBag = MoneyBag(name="name", amount=10, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath", priority = 1)
-        testMoneyBag2 = MoneyBag(name="name 2", amount=20, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath2", priority = 2)
+    fun initMoneyBags() {
+        testMoneyBag = MoneyBag(name = "name", amount = 10, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath", priority = 1)
+        testMoneyBag2 = MoneyBag(name = "name 2", amount = 20, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath2", priority = 2)
     }
 }
