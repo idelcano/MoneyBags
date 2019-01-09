@@ -49,28 +49,29 @@ class MainActivityPresenter {
     }
 
     fun onAddButtonClicked(item: MoneyBag) {
-        openFragment(item, MoneyAmountCreatorDialogFragment(), MoneyAmountCreatorDialogFragment().TAG_DIALOG)
+        openFragment(item, MoneyAmountCreatorDialogFragment(),
+            MoneyAmountCreatorDialogFragment().companion?.TAG_DIALOG)
     }
 
     fun onLogButtonClicked(item: MoneyBag) {
-        openFragment(item, MoneyAmountLogDialogFragment(), MoneyAmountLogDialogFragment().TAG_DIALOG)
+        openFragment(item, MoneyAmountLogDialogFragment(),
+            MoneyAmountLogDialogFragment().companion?.TAG_DIALOG)
     }
     fun onRemoveButtonClicked(item: MoneyBag) {
         removeMoneyBag(item)
     }
 
     private fun removeMoneyBag(item: MoneyBag) {
-        view!!.showDialog(
-            (fun() {
+        view!!.showDialog({
                 deleteMoneyBagUseCase.execute(item)
                 loadMoneyBags()
-            }), R.string.are_you_sure)
+            }, R.string.are_you_sure)
     }
 
     fun openMoneyBagCreatorFragment() {
         val ft = view!!.supportFragmentManager
         val dialogFragment = MoneyBagCreatorDialogFragment()
-        dialogFragment.show(ft, dialogFragment.TAG_DIALOG)
+        dialogFragment.show(ft, dialogFragment.companion?.TAG_DIALOG)
     }
 
     fun openFragment(item: MoneyBag, fragment: BaseFragment, tag: String) {

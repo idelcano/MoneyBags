@@ -36,6 +36,7 @@ import java.util.Date
  */
 @RunWith(AndroidJUnit4::class)
 class MainActivityShould {
+    val delay: Long = 500
     @Rule
     @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
         MainActivity::class.java)
@@ -76,16 +77,16 @@ class MainActivityShould {
             .perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.edit_date)).perform(click())
         onView(withText("OK")).perform(click())
 
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
         val moneyBags: List<MoneyBag?> = MoneyBagRepository().getAll()
@@ -111,16 +112,16 @@ class MainActivityShould {
             .perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.edit_date)).perform(click())
         onView(withText("OK")).perform(click())
 
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
         onView(withId(R.id.add_button)).perform(click())
@@ -144,16 +145,16 @@ class MainActivityShould {
             .perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.edit_date)).perform(click())
         onView(withText("OK")).perform(click())
 
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
         onView(withId(R.id.log_button)).perform(click())
@@ -178,16 +179,16 @@ class MainActivityShould {
             .perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.edit_date)).perform(click())
         onView(withText("OK")).perform(click())
 
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
         onView(withId(R.id.add_button)).perform(click())
@@ -195,9 +196,9 @@ class MainActivityShould {
         onView(withId(R.id.create_money_amount_dialog)).check(matches(isDisplayed()))
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedAmount.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedAmount.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.save_money_amount)).perform(click())
 
@@ -228,16 +229,16 @@ class MainActivityShould {
             .perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.edit_date)).perform(click())
         onView(withText("OK")).perform(click())
 
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
         onView(withId(R.id.log_button)).perform(click())
@@ -249,9 +250,9 @@ class MainActivityShould {
         onView(withId(R.id.add_button)).perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyAmount.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyAmount.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.save_money_amount)).perform(click())
 
@@ -279,16 +280,16 @@ class MainActivityShould {
             .perform(click())
 
         onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyBag.name))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyBag.amount.toString()))
-        pauseTestFor(500)
+        pauseTestFor(delay)
 
         onView(withId(R.id.edit_date)).perform(click())
         onView(withText("OK")).perform(click())
 
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
-        pauseTestFor(500)
+        pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
         onView(withId(R.id.delete_button)).perform(click())

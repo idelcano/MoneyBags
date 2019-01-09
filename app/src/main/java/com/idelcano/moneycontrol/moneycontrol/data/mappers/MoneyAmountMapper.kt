@@ -3,7 +3,7 @@ package com.idelcano.moneycontrol.moneycontrol.data.mappers
 import com.idelcano.moneycontrol.moneycontrol.data.database.model.MoneyAmountDB
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 
-class MoneyAmountMapper() {
+class MoneyAmountMapper {
 
     fun mapToList(moneyAmountDBs: List<MoneyAmountDB>?): MutableList<MoneyAmount> {
         val moneyBags: MutableList<MoneyAmount> = ArrayList()

@@ -14,13 +14,21 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyAmountUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyAmountCreatorDialogPresenter
-import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.*
-import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.*
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_amount
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_name
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.cancel_edit_dialog
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.edit_amount
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.edit_name
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.save_money_amount
 
 class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialogPresenter.View {
     lateinit var presenter: MoneyAmountCreatorDialogPresenter
 
-    val TAG_DIALOG: String = "MoneyBagEditorDialog"
+    companion object {
+        const val TAG_DIALOG: String = "MoneyAmountCreator"
+    }
+
+    var companion = Companion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

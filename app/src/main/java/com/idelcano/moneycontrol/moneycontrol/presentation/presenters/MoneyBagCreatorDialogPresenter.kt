@@ -5,7 +5,11 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.SaveMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
-import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.*
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.edit_amount
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.edit_date
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.edit_name
+import kotlinx.android.synthetic.main.create_money_bag_dialog_layout.priority_seek_bar
+import java.util.Calendar
 import java.util.Date
 
 class MoneyBagCreatorDialogPresenter {
@@ -18,7 +22,7 @@ class MoneyBagCreatorDialogPresenter {
     }
 
     fun detachView() {
-        view?.fragmentManager?.findFragmentByTag(view?.TAG_DIALOG)?.let {
+        view?.fragmentManager?.findFragmentByTag(view?.companion?.TAG_DIALOG)?.let {
             (it as DialogFragment).dismiss()
         }
         view?.onDetach()
