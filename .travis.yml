@@ -11,6 +11,11 @@ android:
   - platform-tools
   - build-tools-28.0.0
   - android-28
+  - android-27
+  - android-26
+  - android-25
+  - android-24
+  - android-23
   - android-22
   - extra-android-m2repository
   - extra-google-google_play_services
@@ -20,7 +25,10 @@ android:
   - extra-android-support
 env:
 script:
-- "./gradlew detektCheck "
+- "./gradlew detektCustom "
+install:
+  - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
+  - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
 cache:
   directories:
   - "$HOME/.m2"
