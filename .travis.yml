@@ -34,8 +34,8 @@ script:
 - "./gradlew --no-daemon clean installDebug"
 - "./gradlew detektCustom "
 - "./gradlew --no-daemon ktlint"
-- "./gradlew --no-daemon testDebugUnitTest"
-- "../gradlew --no-daemon connectedAndroidTest"
+- "./gradlew --no-daemon :testDebugUnitTest"
+- "../gradlew --no-daemon :connectedAndroidTest"
 install:
   - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
   - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
