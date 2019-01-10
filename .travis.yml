@@ -34,8 +34,8 @@ script:
 - "./gradlew --no-daemon clean installDebug"
 - "./gradlew detektCustom "
 - "./gradlew --no-daemon ktlint"
-- "./gradlew --no-daemon :testDebugUnitTest"
-- "./gradlew --no-daemon :connectedAndroidTest"
+- "./gradlew --no-daemon testDebugUnitTest"
+- "./gradlew --no-daemon connectedCheck"
 before_install:
     - pip install --user codecov
 after_success:
