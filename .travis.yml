@@ -32,7 +32,8 @@ before_script:
 - adb shell input keyevent 82
 script:
 - "./gradlew --no-daemon clean installDebug"
-- "$HOME/MoneyHelper/.gradlew --no-daemon :app:connectedDebugAndroidTest"
+- "gradle build connectedCheck"
+- ".gradle build connectedCheck"
 - "./gradlew detektCustom "
 - "./gradlew --no-daemon ktlint"
 - "./gradlew --no-daemon testDebugUnitTest"
