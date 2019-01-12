@@ -27,13 +27,10 @@ env:
 before_script:
 - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
 - emulator -avd test -no-audio -no-window &
-- android-wait-for-emulator
-- adb devices
-- adb shell input keyevent 82
+- sleep 300
+- adb shell input keyevent 82 &
 script:
-- "./gradlew --no-daemon clean installDebug"
-- "gradlew build connectedCheck"
-- ".gradlew build connectedCheck"
+- "./gradlew build connectedCheck"
 - "./gradlew detektCustom "
 - "./gradlew --no-daemon ktlint"
 - "./gradlew --no-daemon testDebugUnitTest"
@@ -46,6 +43,9 @@ install:
   - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
   - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
 cache:
+  before_cache:
+  - "rm -fr  $HOME/m2/*"
+  - "rm -fr $HOME/.gradle/*"
   directories:
   - "$HOME/.m2"
   - "$HOME/.gradle"
