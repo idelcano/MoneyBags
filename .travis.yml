@@ -30,11 +30,7 @@ before_script:
 - sleep 300
 - adb shell input keyevent 82 &
 script:
-- "./gradlew build connectedCheck"
-- "./gradlew detektCustom "
-- "./gradlew --no-daemon ktlint"
-- "./gradlew --no-daemon testDebugUnitTest"
-- "./gradlew --no-daemon connectedCheck"
+- "./gradlew build connectedCheck" 
 before_install:
     - pip install --user codecov
 after_success:
