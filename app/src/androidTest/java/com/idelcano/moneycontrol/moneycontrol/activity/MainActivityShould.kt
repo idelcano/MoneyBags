@@ -16,6 +16,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.view.WindowManager
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.database.DBController
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
@@ -29,6 +30,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.Date
 
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -38,32 +40,49 @@ import java.util.Date
 class MainActivityShould {
     val delay: Long = 500
     @Rule
-    @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
-        MainActivity::class.java)
+    @JvmField
+    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
+        MainActivity::class.java
+    )
+
+    @Before
+    fun unlockScreen() {
+        val activity = activityRule.getActivity()
+        val wakeUpDevice = Runnable {
+            activity.getWindow().addFlags(
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+            )
+        }
+        activity.runOnUiThread(wakeUpDevice)
+    }
+
     @Before
     fun setup() {
         DBController(InstrumentationRegistry.getTargetContext(), true).initDB()
     }
 
-    @Test fun `has_a_action_button_visible`() {
+    @Test
+    fun `has_a_action_button_visible`() {
         onView(withId(R.id.fab))
-                .perform(click())
-                .check(matches(isDisplayed()))
+            .perform(click())
+            .check(matches(isDisplayed()))
     }
 
     @Test
     fun `open_money_bag_dialog_after_click_on_add_bag_action`() {
         onView(withId(R.id.fab))
-                .perform(click())
+            .perform(click())
 
         onView(withText(R.string.create_money))
-                .check(matches(isDisplayed()))
+            .check(matches(isDisplayed()))
 
         onView(withText(R.string.add))
-                .perform(click())
+            .perform(click())
 
         onView(withId(R.id.create_money_bag_dialog))
-                .check(matches(isDisplayed()))
+            .check(matches(isDisplayed()))
     }
 
     @Test
@@ -85,7 +104,13 @@ class MainActivityShould {
         onView(withText("OK")).perform(click())
 
         pauseTestFor(delay)
-        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        onView(withId(R.id.priority_seek_bar)).perform(
+            GeneralClickAction(
+                Tap.SINGLE,
+                GeneralLocation.TOP_RIGHT,
+                Press.FINGER
+            )
+        )
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
@@ -120,7 +145,13 @@ class MainActivityShould {
         onView(withText("OK")).perform(click())
 
         pauseTestFor(delay)
-        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        onView(withId(R.id.priority_seek_bar)).perform(
+            GeneralClickAction(
+                Tap.SINGLE,
+                GeneralLocation.TOP_RIGHT,
+                Press.FINGER
+            )
+        )
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
@@ -153,7 +184,13 @@ class MainActivityShould {
         onView(withText("OK")).perform(click())
 
         pauseTestFor(delay)
-        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        onView(withId(R.id.priority_seek_bar)).perform(
+            GeneralClickAction(
+                Tap.SINGLE,
+                GeneralLocation.TOP_RIGHT,
+                Press.FINGER
+            )
+        )
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
@@ -187,7 +224,13 @@ class MainActivityShould {
         onView(withText("OK")).perform(click())
 
         pauseTestFor(delay)
-        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        onView(withId(R.id.priority_seek_bar)).perform(
+            GeneralClickAction(
+                Tap.SINGLE,
+                GeneralLocation.TOP_RIGHT,
+                Press.FINGER
+            )
+        )
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
@@ -237,7 +280,13 @@ class MainActivityShould {
         onView(withText("OK")).perform(click())
 
         pauseTestFor(delay)
-        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        onView(withId(R.id.priority_seek_bar)).perform(
+            GeneralClickAction(
+                Tap.SINGLE,
+                GeneralLocation.TOP_RIGHT,
+                Press.FINGER
+            )
+        )
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
@@ -288,7 +337,13 @@ class MainActivityShould {
         onView(withText("OK")).perform(click())
 
         pauseTestFor(delay)
-        onView(withId(R.id.priority_seek_bar)).perform(GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_RIGHT, Press.FINGER))
+        onView(withId(R.id.priority_seek_bar)).perform(
+            GeneralClickAction(
+                Tap.SINGLE,
+                GeneralLocation.TOP_RIGHT,
+                Press.FINGER
+            )
+        )
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
