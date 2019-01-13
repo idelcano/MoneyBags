@@ -2,9 +2,13 @@ package com.idelcano.moneycontrol.moneycontrol.presentation.presenters
 
 import android.os.Bundle
 import com.idelcano.moneycontrol.moneycontrol.R
+import com.idelcano.moneycontrol.moneycontrol.domain.entity.DayCounter
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteDayCounterUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetDayCounterUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.IListable
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.DayCounterCreatorDialogFragment
@@ -15,35 +19,49 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.Money
 
 class MainActivityPresenter {
     lateinit var getMoneyBagListUseCase: GetMoneyBagsUseCase
+    lateinit var getDayCountersUseCase: GetDayCounterUseCase
     lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
+    lateinit var deleteDayCounterUseCase : DeleteDayCounterUseCase
     var view: MainActivity? = null
 
-    fun initPresenter(view: MainActivity, getMoneyBagListUseCase: GetMoneyBagsUseCase, deleteMoneyBagUseCase: DeleteMoneyBagUseCase) {
+    fun initPresenter(view: MainActivity, getMoneyBagListUseCase: GetMoneyBagsUseCase,
+                      getDayCountersUseCase: GetDayCounterUseCase,
+                      deleteMoneyBagUseCase: DeleteMoneyBagUseCase, deleteDayCounterUseCase: DeleteDayCounterUseCase) {
         this.view = view
         this.getMoneyBagListUseCase = getMoneyBagListUseCase
+        this.getDayCountersUseCase = getDayCountersUseCase;
         this.deleteMoneyBagUseCase = deleteMoneyBagUseCase
+        this.deleteDayCounterUseCase = deleteDayCounterUseCase
     }
 
     fun loadData() {
-        loadingMoneyBags()
-        loadMoneyBags()
+        loadingItems()
+        loadItems()
     }
 
-    private fun loadMoneyBags() {
+    private fun loadItems() {
         getMoneyBagListUseCase.execute {
-            showMoneyBags(it)
+            addItems(it)
+            showItems()
+        }
+        getDayCountersUseCase.execute {
+            addItems(it)
+            showItems()
         }
     }
 
-    private fun loadingMoneyBags() {
+    private fun loadingItems() {
         view?.showLoading()
-        view?.clearMoneyBags()
+        view?.clearItems()
     }
 
-    private fun showMoneyBags(moneyBags: List<MoneyBag?>) {
+    private fun addItems(items: List<IListable?>) {
+        view?.addItems(items)
+    }
+
+    private fun showItems() {
         view?.hideLoading()
-        view?.showMoneyBags(moneyBags)
-        view?.showTotalMoneyBags(moneyBags.size)
+        view?.showItems()
     }
 
     fun detachView() {
@@ -51,22 +69,35 @@ class MainActivityPresenter {
     }
 
     fun onAddButtonClicked(item: MoneyBag) {
-        openFragment(item, MoneyAmountCreatorDialogFragment(),
-            MoneyAmountCreatorDialogFragment().companion?.TAG_DIALOG)
+        openFragment(
+            item, MoneyAmountCreatorDialogFragment(),
+            MoneyAmountCreatorDialogFragment().companion?.TAG_DIALOG
+        )
     }
 
     fun onLogButtonClicked(item: MoneyBag) {
         openFragment(item, MoneyAmountLogDialogFragment(),
             MoneyAmountLogDialogFragment().companion?.TAG_DIALOG)
     }
-    fun onRemoveButtonClicked(item: MoneyBag) {
-        removeMoneyBag(item)
+    fun onRemoveButtonClicked(item: IListable) {
+        if(item is MoneyBag) {
+            removeMoneyBag(item)
+        } else if (item is DayCounter){
+            removeDayCounter(item)
+        }
+    }
+
+    private fun removeDayCounter(item: DayCounter) {
+        view!!.showDialog({
+            deleteDayCounterUseCase.execute(item)
+            loadData()
+        }, R.string.are_you_sure)
     }
 
     private fun removeMoneyBag(item: MoneyBag) {
         view!!.showDialog({
                 deleteMoneyBagUseCase.execute(item)
-                loadMoneyBags()
+                loadData()
             }, R.string.are_you_sure)
     }
 
@@ -109,10 +140,11 @@ class MainActivityPresenter {
     }
 
     interface View {
-        fun showMoneyBags(moneyBags: List<MoneyBag?>)
-        fun clearMoneyBags()
+        fun addItems(items: List<IListable?>)
+        fun clearItems()
+        fun showItems()
         fun showLoading()
         fun hideLoading()
-        fun showTotalMoneyBags(count: Int)
+        fun showTotalItems(count: Int)
     }
 }

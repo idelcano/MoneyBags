@@ -7,14 +7,19 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.idelcano.moneycontrol.moneycontrol.R
+import com.idelcano.moneycontrol.moneycontrol.data.repositories.DayCounterRepository
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteDayCounterUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetDayCounterUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
-import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyBagAdapter
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.IListable
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.ListableItemAdapter
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.DayCounterCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
 import kotlinx.android.synthetic.main.activity_main.fab
@@ -25,7 +30,7 @@ import kotlinx.android.synthetic.main.content_main.recycler
 class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     var presenter: MainActivityPresenter = MainActivityPresenter()
-    lateinit var adapter: MoneyBagAdapter
+    lateinit var adapter: ListableItemAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,12 +45,12 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         }
     }
 
-    override fun showMoneyBags(moneyBags: List<MoneyBag?>) {
-        adapter.setMoneyBags(moneyBags)
+    override fun addItems(items: List<IListable?>) {
+        adapter.setItems(items)
     }
 
-    override fun clearMoneyBags() {
-        adapter.clearMoneyBags()
+    override fun clearItems() {
+        adapter.clearItems()
     }
 
     override fun showLoading() {
@@ -57,23 +62,31 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         progress_bar.visibility = View.GONE
     }
 
-    override fun showTotalMoneyBags(count: Int) {
+    override fun showItems(){
+        adapter.showItems()
+    }
+
+    override fun showTotalItems(count: Int) {
         header_text.text = String.format(getString(R.string.header_text), count)
     }
 
     private fun initializeRecyclerView() {
-        this.adapter = MoneyBagAdapter(
+        this.adapter = ListableItemAdapter(
             { item: MoneyBag -> presenter.onAddButtonClicked(item) },
             { item: MoneyBag -> presenter.onLogButtonClicked(item) },
-            { item: MoneyBag -> presenter.onRemoveButtonClicked(item) })
+            { item: IListable -> presenter.onRemoveButtonClicked(item) })
         recycler.adapter = adapter
     }
 
     private fun initializePresenter() {
         var coroutinesExecutor = CoroutinesExecutor()
+        var moneyRepository= MoneyBagRepository()
+        var dayCounterRepository= DayCounterRepository()
         presenter.initPresenter(this,
-            GetMoneyBagsUseCase(MoneyBagRepository(), coroutinesExecutor),
-            DeleteMoneyBagUseCase(MoneyBagRepository(), coroutinesExecutor)
+            GetMoneyBagsUseCase(moneyRepository, coroutinesExecutor),
+            GetDayCounterUseCase(dayCounterRepository, coroutinesExecutor),
+            DeleteMoneyBagUseCase(moneyRepository, coroutinesExecutor),
+            DeleteDayCounterUseCase(dayCounterRepository, coroutinesExecutor)
             )
         presenter.loadData()
     }
@@ -94,7 +107,8 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     private val mMyFragmentListener = object : BaseFragment.Listener {
         override fun onDetached(fragment: BaseFragment) {
             if (fragment is (MoneyBagCreatorDialogFragment) ||
-                fragment is (MoneyAmountCreatorDialogFragment)) {
+                fragment is (MoneyAmountCreatorDialogFragment) ||
+                fragment is (DayCounterCreatorDialogFragment)) {
                 presenter.loadData()
             }
             fragment.setListener(null)
