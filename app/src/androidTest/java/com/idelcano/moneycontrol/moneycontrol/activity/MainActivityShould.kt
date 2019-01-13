@@ -25,14 +25,14 @@ import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import org.hamcrest.CoreMatchers.`is`
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.Date
-import org.junit.After
-import org.junit.Assert.assertNotNull
 
 
 /**
@@ -46,6 +46,7 @@ class MainActivityShould {
 
     @Rule
     var mActivityRule = ActivityTestRule<MainActivity>(MainActivity::class.java)
+    lateinit var mReceiptCaptureActivity : MainActivity
 
     @Before
     @Throws(Exception::class)
