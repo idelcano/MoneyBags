@@ -1,8 +1,8 @@
 package com.idelcano.moneycontrol.moneycontrol.domain.entity
 
+import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import com.idelcano.moneycontrol.moneycontrol.utils.DhisCodeGenerator
 import java.util.Date
-import java.util.Calendar
 
 data class MoneyBag(
     val uid: String = DhisCodeGenerator.generateCode(),
@@ -34,9 +34,9 @@ data class MoneyBag(
     }
 
     fun remainingTime(): Int {
-        val cal = getTodayDateWhitoutTime()
+        val cal = DateParser().getTodayDateWhitoutTime()
         val diff = dateLimit.getTime() - cal.time.time
-        val days = getDaysFromDiff(diff)
+        val days = DateParser().getDaysFromDiff(diff)
         return days.toInt()
     }
 
@@ -46,22 +46,5 @@ data class MoneyBag(
             result -= moneyAmount.amount
         }
         return result
-    }
-
-    private fun getDaysFromDiff(diff: Long): Long {
-        val secs = diff / 1000
-        val min = secs / 60
-        val hours = min / 60
-        val days = hours / 24
-        return days
-    }
-
-    private fun getTodayDateWhitoutTime(): Calendar {
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.HOUR_OF_DAY, 0)
-        cal.set(Calendar.MINUTE, 0)
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
-        return cal
     }
 }
