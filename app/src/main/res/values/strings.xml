@@ -24,5 +24,6 @@
     <string name="remaining">Remaining days</string>
     <string name="amount_remaining">Remaining amount</string>
     <string name="creation_date_hint">Creation date</string>
+    <string name="create_day_counter">Create day counter</string>
 
 </resources>
