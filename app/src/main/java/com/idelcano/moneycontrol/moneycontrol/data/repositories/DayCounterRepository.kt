@@ -1,6 +1,7 @@
 package com.idelcano.moneycontrol.moneycontrol.data.repositories
 
 import com.idelcano.moneycontrol.moneycontrol.data.database.model.DayCounterDB
+import com.idelcano.moneycontrol.moneycontrol.data.database.model.DayCounterDB_Table
 import com.idelcano.moneycontrol.moneycontrol.domain.boundary.IDayCounterRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.DayCounter
 import com.raizlabs.android.dbflow.sql.language.OrderBy

@@ -68,8 +68,8 @@ class DayCounterRepositoryShould {
 
         // then
         assertEquals(2, repository.getAll().size)
-        assertEquals(testDayCounter, repository.getAll().get(0))
-        assertEquals(testDayCounter2, repository.getAll().get(1))
+        assertEquals(testDayCounter2, repository.getAll().get(0))
+        assertEquals(testDayCounter, repository.getAll().get(1))
     }
 
     fun initDayCounters(date: Date) {
