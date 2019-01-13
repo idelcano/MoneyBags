@@ -7,6 +7,8 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCa
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.DayCounterCreatorDialogFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MenuDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountLogDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
@@ -66,6 +68,29 @@ class MainActivityPresenter {
                 deleteMoneyBagUseCase.execute(item)
                 loadMoneyBags()
             }, R.string.are_you_sure)
+    }
+
+    fun openMenuDialog() {
+        val ft = view!!.supportFragmentManager
+        val dialogFragment = MenuDialogFragment()
+        dialogFragment.addActions(
+            fun (action: Actions) {
+            when(action){
+                Actions.CREATE_MONEY_BAG -> {
+                    openMoneyBagCreatorFragment()
+                }
+                Actions.CREATE_DAY_COUNTER -> {
+                    openDayCounterFragment()
+                }
+            }
+        })
+        dialogFragment.show(ft, dialogFragment.companion?.TAG_DIALOG)
+    }
+
+    fun openDayCounterFragment() {
+        val ft = view!!.supportFragmentManager
+        val dialogFragment = DayCounterCreatorDialogFragment()
+        dialogFragment.show(ft, dialogFragment.companion?.TAG_DIALOG)
     }
 
     fun openMoneyBagCreatorFragment() {

@@ -3,7 +3,6 @@ package com.idelcano.moneycontrol.moneycontrol.presentation.views
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -37,10 +36,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private fun initializeFabAction() {
         fab.setOnClickListener { view ->
-            Snackbar.make(view, R.string.create_money, Snackbar.LENGTH_LONG)
-                .setAction(R.string.add, View.OnClickListener {
-                    presenter.openMoneyBagCreatorFragment()
-                }).show()
+            presenter.openMenuDialog();
         }
     }
 
