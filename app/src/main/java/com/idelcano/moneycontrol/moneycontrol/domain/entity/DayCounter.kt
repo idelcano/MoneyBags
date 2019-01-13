@@ -1,5 +1,6 @@
 package com.idelcano.moneycontrol.moneycontrol.domain.entity
 
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.IListable
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import com.idelcano.moneycontrol.moneycontrol.utils.DhisCodeGenerator
 import java.util.Date
@@ -10,7 +11,7 @@ data class DayCounter(
     val createdDate: Date = Date(),
     val iconPath: String,
     val priority: Int
-) {
+) : IListable {
 
     companion object {
         const val MAXIMUN_RANGE = 5
