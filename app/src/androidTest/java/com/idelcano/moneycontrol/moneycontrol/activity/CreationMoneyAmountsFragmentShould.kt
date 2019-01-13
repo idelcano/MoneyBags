@@ -18,10 +18,9 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.database.DBController
-import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
+import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,7 +33,7 @@ import java.util.Date
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class MainActivityShould {
+class CreationMoneyAmountsFragmentShould {
     val delay: Long = 500
     @Rule
     @JvmField var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(
@@ -44,44 +43,8 @@ class MainActivityShould {
         DBController(InstrumentationRegistry.getTargetContext(), true).initDB()
     }
 
-    @Test fun `has_a_action_button_visible`() {
-        onView(withId(R.id.fab))
-                .perform(click())
-                .check(matches(isDisplayed()))
-    }
-
     @Test
-    fun `open_money_bag_dialog_after_click_on_add_bag_action`() {
-        onView(withId(R.id.fab))
-                .perform(click())
-
-        onView(withText(R.string.create_money))
-                .check(matches(isDisplayed()))
-
-        onView(withText(R.string.create_money))
-                .perform(click())
-
-        onView(withId(R.id.create_money_bag_dialog))
-                .check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun `open_day_counter_dialog_after_click_on_add_bag_action`() {
-        onView(withId(R.id.fab))
-            .perform(click())
-
-        onView(withText(R.string.create_day_counter))
-            .check(matches(isDisplayed()))
-
-        onView(withText(R.string.create_money))
-            .perform(click())
-
-        onView(withId(R.id.create_day_counter_dialog))
-            .check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun `has_visible_money_bag_in_listview_after_create`() {
+    fun `has_visible_log_money_amount_dialog_fragment_after_click_on_log_button`() {
         // given
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
@@ -103,22 +66,21 @@ class MainActivityShould {
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
-        val moneyBags: List<MoneyBag?> = MoneyBagRepository().getAll()
-        assertEquals(1, moneyBags.size)
-        val moneyBag: MoneyBag = moneyBags[0]!!
-        assertEquals(expectedMoneyBag.name, moneyBag.name)
-        assertEquals(expectedMoneyBag.amount, moneyBag.amount)
-        assertEquals(expectedMoneyBag.dateLimit.day, moneyBag.dateLimit.day)
-        assertEquals(expectedMoneyBag.dateLimit.month, moneyBag.dateLimit.month)
-        assertEquals(expectedMoneyBag.dateLimit.year, moneyBag.dateLimit.year)
-        assertEquals(expectedMoneyBag.priority, moneyBag.priority)
-        onView(withText(expectedMoneyBag.name)).check(matches(isDisplayed()))
+        onView(withId(R.id.log_button)).perform(click())
+
+        onView(withId(R.id.log_money_bag_dialog)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.cancel_money_log_dialog)).perform(click())
+
+        onView(withText(expectedMoneyBag.name))
+            .check(matches(isDisplayed()))
     }
 
     @Test
-    fun `has_visible_edit_money_bag_dialog_fragment_after_click_on_add_button`() {
+    fun `has_visible_item_in_log_money_amount_dialog_fragment_after_create_it`() {
         // given
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
+        var expectedAmount: MoneyAmount = createExpectedAmount(expectedMoneyBag)
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -142,16 +104,27 @@ class MainActivityShould {
 
         onView(withId(R.id.create_money_amount_dialog)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.cancel_edit_dialog)).perform(click())
+        onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedAmount.name))
+        pauseTestFor(delay)
+        onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedAmount.amount.toString()))
+        pauseTestFor(delay)
+
+        onView(withId(R.id.save_money_amount)).perform(click())
 
         onView(withText(expectedMoneyBag.name))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.log_button)).perform(click())
+
+        onView(withText(expectedAmount.name))
             .check(matches(isDisplayed()))
     }
 
     @Test
-    fun `remove_money_bag_after_click_on_delete_button`() {
+    fun `havent_visible_item_in_log_money_amount_dialog_fragment_after_remove_it`() {
         // given
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
+        var expectedMoneyAmount: MoneyAmount = createExpectedAmount(expectedMoneyBag)
 
         onView(withId(R.id.fab))
             .perform(click())
@@ -171,11 +144,38 @@ class MainActivityShould {
         pauseTestFor(delay)
         onView(withId(R.id.save_money_bag)).perform(click())
 
-        onView(withId(R.id.delete_button)).perform(click())
+        onView(withId(R.id.log_button)).perform(click())
+
+        onView(withId(R.id.log_money_bag_dialog)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.cancel_money_log_dialog)).perform(click())
+
+        onView(withId(R.id.add_button)).perform(click())
+
+        onView(withId(R.id.edit_name)).perform(clearText(), typeText(expectedMoneyAmount.name))
+        pauseTestFor(delay)
+        onView(withId(R.id.edit_amount)).perform(clearText(), typeText(expectedMoneyAmount.amount.toString()))
+        pauseTestFor(delay)
+
+        onView(withId(R.id.save_money_amount)).perform(click())
+
+        onView(withText(expectedMoneyBag.name))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.log_button)).perform(click())
+
+        onView(withId(R.id.delete_amount_button)).perform(click())
 
         onView(withText("Yes")).perform(click())
 
-        onView(withText(expectedMoneyBag.name)).check(doesNotExist())
+        onView(withText(expectedMoneyAmount.name))
+            .check(doesNotExist())
+    }
+
+    private fun createExpectedAmount(expectedMoneyBag: MoneyBag): MoneyAmount {
+        var expectedAmount: MoneyAmount =
+            MoneyAmount(name = "testname", amount = 15, creationDate = Date(), moneyBagUid = expectedMoneyBag.uid)
+        return expectedAmount
     }
 
     private fun createExpectedMoneyBag(): MoneyBag {
