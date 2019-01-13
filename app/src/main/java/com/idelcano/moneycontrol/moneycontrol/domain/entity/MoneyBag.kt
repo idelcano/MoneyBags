@@ -1,5 +1,6 @@
 package com.idelcano.moneycontrol.moneycontrol.domain.entity
 
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.IListable
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import com.idelcano.moneycontrol.moneycontrol.utils.DhisCodeGenerator
 import java.util.Date
@@ -13,7 +14,7 @@ data class MoneyBag(
     val iconPath: String,
     val priority: Int,
     var amountList: List<MoneyAmount> = ArrayList()
-) {
+) : IListable {
 
     companion object {
         const val MAXIMUN_RANGE = 5
