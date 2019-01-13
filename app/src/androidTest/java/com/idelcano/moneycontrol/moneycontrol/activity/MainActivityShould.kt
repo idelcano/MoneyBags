@@ -11,7 +11,6 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.action.ViewActions.typeText
 import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.assertThat
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
@@ -24,10 +23,7 @@ import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagReposito
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.MainActivity
-import org.hamcrest.CoreMatchers.`is`
-import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -44,32 +40,14 @@ import java.util.Date
 class MainActivityShould {
     val delay: Long = 500
 
+
     @Rule
-    var mActivityRule = ActivityTestRule<MainActivity>(MainActivity::class.java)
-    lateinit var mReceiptCaptureActivity : MainActivity
-
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-        mReceiptCaptureActivity = mActivityRule.getActivity()
-    }
-
-    @After
-    @Throws(Exception::class)
-    fun tearDown() {
-        // Call finish() on all activities in @After to avoid exceptions in
-        // later calls to getActivity() in subsequent tests
-        mReceiptCaptureActivity!!.finish()
-    }
-
-    fun testPreconditions() {
-        assertNotNull(mReceiptCaptureActivity)
-        assertThat(mReceiptCaptureActivity!!.hasWindowFocus(), `is`(true))
-    }
+    @JvmField
+    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Before
     fun unlockScreen() {
-        val activity = mReceiptCaptureActivity
+        val activity = mActivityTestRule.activity
         val wakeUpDevice = Runnable {
             activity.getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
@@ -87,7 +65,6 @@ class MainActivityShould {
 
     @Test
     fun `has_a_action_button_visible`() {
-        testPreconditions()
         onView(withId(R.id.fab))
             .perform(click())
             .check(matches(isDisplayed()))
@@ -95,7 +72,6 @@ class MainActivityShould {
 
     @Test
     fun `open_money_bag_dialog_after_click_on_add_bag_action`() {
-        testPreconditions()
         onView(withId(R.id.fab))
             .perform(click())
 
@@ -111,7 +87,6 @@ class MainActivityShould {
 
     @Test
     fun `has_visible_money_bag_in_listview_after_create`() {
-        testPreconditions()
         // given
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
@@ -154,7 +129,6 @@ class MainActivityShould {
     @Test
     fun `has_visible_edit_money_bag_dialog_fragment_after_click_on_add_button`() {
         // given
-        testPreconditions()
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
@@ -194,7 +168,6 @@ class MainActivityShould {
     @Test
     fun `has_visible_log_money_amount_dialog_fragment_after_click_on_log_button`() {
         // given
-        testPreconditions()
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
@@ -234,7 +207,6 @@ class MainActivityShould {
     @Test
     fun `has_visible_item_in_log_money_amount_dialog_fragment_after_create_it`() {
         // given
-        testPreconditions()
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
         var expectedAmount: MoneyAmount = createExpectedAmount(expectedMoneyBag)
 
@@ -285,7 +257,6 @@ class MainActivityShould {
     @Test
     fun `havent_visible_item_in_log_money_amount_dialog_fragment_after_remove_it`() {
         // given
-        testPreconditions()
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
         var expectedMoneyAmount: MoneyAmount = createExpectedAmount(expectedMoneyBag)
 
@@ -344,7 +315,6 @@ class MainActivityShould {
     @Test
     fun `remove_money_bag_after_click_on_delete_button`() {
         // given
-        testPreconditions()
         var expectedMoneyBag: MoneyBag = createExpectedMoneyBag()
 
         onView(withId(R.id.fab))
