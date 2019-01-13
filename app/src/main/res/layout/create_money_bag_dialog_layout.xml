@@ -5,64 +5,64 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-<LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/background_dialog"
-              android:padding="@dimen/dialog_padding"
-              android:orientation="vertical">
-
-    <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            style="@style/AppDialogEdittextContainer">
-        <android.support.design.widget.TextInputEditText
-                android:id="@+id/edit_name"
-                style="@style/AppDialogEdittext"
-                android:hint="@string/name_hint"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-            style="@style/AppDialogEdittextContainer">
-        <android.support.design.widget.TextInputEditText
-                android:id="@+id/edit_amount"
-                style="@style/AppDialogEdittext"
-                android:inputType="number"
-                android:hint="@string/amount_hint"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-            style="@style/AppDialogEdittextContainer">
-        <android.support.design.widget.TextInputEditText
-                android:id="@+id/edit_date"
-                style="@style/AppDialogEdittext"
-                android:focusable="false"
-                android:editable="false"
-                android:hint="@string/limit_date_hint"/>
-    </android.support.design.widget.TextInputLayout>
-    <ImageView
-            android:id="@+id/icon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/priority"/>
-    <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/priority_seek_bar"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_marginBottom="10dp"
-            android:max="4"
-            android:progress="1"/>
-    <Button
-            android:id="@+id/save_money_bag"
-            android:text="@string/save"
-            style="@style/AppDialogButton"/>
-    <Button
-            android:id="@+id/cancel_money_creator_dialog"
-            android:text="@string/cancel"
-            style="@style/AppDialogButton"/>
-</LinearLayout>
+            android:background="@color/background_dialog"
+            android:padding="@dimen/dialog_padding"
+            android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                style="@style/AppDialogEdittextContainer">
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_name"
+                    style="@style/AppDialogEdittext"
+                    android:hint="@string/name_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                style="@style/AppDialogEdittextContainer">
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_amount"
+                    style="@style/AppDialogEdittext"
+                    android:inputType="number"
+                    android:hint="@string/amount_hint"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                style="@style/AppDialogEdittextContainer">
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_date"
+                    style="@style/AppDialogEdittext"
+                    android:focusable="false"
+                    android:editable="false"
+                    android:hint="@string/limit_date_hint"/>
+        </android.support.design.widget.TextInputLayout>
+        <ImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/priority"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/priority_seek_bar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_marginBottom="10dp"
+                android:max="4"
+                android:progress="1"/>
+        <Button
+                android:id="@+id/save_money_bag"
+                android:text="@string/save"
+                style="@style/AppDialogButton"/>
+        <Button
+                android:id="@+id/cancel_money_creator_dialog"
+                android:text="@string/cancel"
+                style="@style/AppDialogButton"/>
+    </LinearLayout>
 </ScrollView>
