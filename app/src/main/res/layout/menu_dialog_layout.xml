@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/create_menu_dialog"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background_dialog"
+              android:padding="@dimen/dialog_padding"
+              android:orientation="vertical">
+
+    <Button
+            android:id="@+id/create_money_bag"
+            android:text="@string/create_money"
+            style="@style/AppDialogButton"/>
+
+    <Button
+            android:id="@+id/create_day_counter"
+            android:text="@string/create_day_counter"
+            style="@style/AppDialogButton"/>
+
+    <Button
+            android:id="@+id/cancel_menu"
+            android:text="@string/cancel"
+            style="@style/AppDialogButton"/>
+</LinearLayout>

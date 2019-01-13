@@ -15,24 +15,29 @@ import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyAmountLogDialogPresenter
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyAmountAdapter
-import kotlinx.android.synthetic.main.money_bag_log_dialog.view.*
+import kotlinx.android.synthetic.main.money_bag_log_dialog.view.cancel_money_log_dialog
+import kotlinx.android.synthetic.main.money_bag_log_dialog.view.recycler_amount_bags
 
 class MoneyAmountLogDialogFragment : BaseFragment(), MoneyAmountLogDialogPresenter.View {
     lateinit var presenter: MoneyAmountLogDialogPresenter
-    lateinit var adapter : MoneyAmountAdapter
+    lateinit var adapter: MoneyAmountAdapter
 
-    val TAG_DIALOG: String = "MoneyAmountLogDialog"
+    companion object {
+        const val TAG_DIALOG: String = "MoneyAmountLogDialog"
+    }
+
+    var companion = Companion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.WideDialog)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.money_bag_log_dialog, container, false)
         initializeRecyclerView(view)
         initPresenter()
-        val uid : String = getArguments()!!.getString(MoneyBag.javaClass.canonicalName)
+        val uid: String = getArguments()!!.getString(MoneyBag.javaClass.canonicalName)
 
         presenter.loadMoneyBag(uid)
 
@@ -48,7 +53,7 @@ class MoneyAmountLogDialogFragment : BaseFragment(), MoneyAmountLogDialogPresent
     }
 
     private fun initializeRecyclerView(view: View) {
-        this.adapter = MoneyAmountAdapter () { item ->
+        this.adapter = MoneyAmountAdapter() { item ->
             presenter.onMoneyAmountTouch(item)
         }
         view.recycler_amount_bags.adapter = adapter
@@ -80,5 +85,4 @@ class MoneyAmountLogDialogFragment : BaseFragment(), MoneyAmountLogDialogPresent
     override fun clearMoneyAmounts() {
         adapter.clearMoneyAmounts()
     }
-
 }

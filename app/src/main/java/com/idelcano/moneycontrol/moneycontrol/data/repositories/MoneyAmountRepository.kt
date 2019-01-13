@@ -6,7 +6,6 @@ import com.idelcano.moneycontrol.moneycontrol.domain.boundary.IMoneyAmountReposi
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.raizlabs.android.dbflow.sql.language.Select
 
-
 class MoneyAmountRepository : IMoneyAmountRepository {
     override fun getAll(): List<MoneyAmount> {
         return MoneyAmountMapper().mapToList(
@@ -14,12 +13,12 @@ class MoneyAmountRepository : IMoneyAmountRepository {
     }
 
     override fun save(moneyAmount: MoneyAmount) {
-        val moneyAmountDB : MoneyAmountDB = MoneyAmountMapper().map(moneyAmount)
+        val moneyAmountDB: MoneyAmountDB = MoneyAmountMapper().map(moneyAmount)
         moneyAmountDB.save()
     }
 
     override fun delete(moneyAmount: MoneyAmount) {
-        val moneyAmountDB : MoneyAmountDB = MoneyAmountMapper().map(moneyAmount)
+        val moneyAmountDB: MoneyAmountDB = MoneyAmountMapper().map(moneyAmount)
         moneyAmountDB.delete()
     }
 }

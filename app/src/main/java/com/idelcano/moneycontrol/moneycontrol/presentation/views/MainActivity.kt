@@ -3,29 +3,34 @@ package com.idelcano.moneycontrol.moneycontrol.presentation.views
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.idelcano.moneycontrol.moneycontrol.R
+import com.idelcano.moneycontrol.moneycontrol.data.repositories.DayCounterRepository
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyBag
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteDayCounterUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.DeleteMoneyBagUseCase
+import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetDayCounterUseCase
 import com.idelcano.moneycontrol.moneycontrol.domain.usecase.GetMoneyBagsUseCase
 import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesExecutor
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MainActivityPresenter
-import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.MoneyBagAdapter
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.IListable
+import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.adapters.ListableItemAdapter
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.BaseFragment
+import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.DayCounterCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyAmountCreatorDialogFragment
 import com.idelcano.moneycontrol.moneycontrol.presentation.views.fragments.MoneyBagCreatorDialogFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
-
+import kotlinx.android.synthetic.main.activity_main.fab
+import kotlinx.android.synthetic.main.content_main.header_text
+import kotlinx.android.synthetic.main.content_main.progress_bar
+import kotlinx.android.synthetic.main.content_main.recycler
 
 class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
-    var presenter : MainActivityPresenter = MainActivityPresenter()
-    lateinit var adapter : MoneyBagAdapter
+    var presenter: MainActivityPresenter = MainActivityPresenter()
+    lateinit var adapter: ListableItemAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,47 +41,52 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private fun initializeFabAction() {
         fab.setOnClickListener { view ->
-            Snackbar.make(view, R.string.create_money, Snackbar.LENGTH_LONG)
-                .setAction(R.string.add, View.OnClickListener {
-                    presenter.openMoneyBagCreatorFragment()
-                }).show()
+            presenter.openMenuDialog();
         }
     }
 
-    override fun showMoneyBags(moneyBags: List<MoneyBag?>) {
-        adapter.setMoneyBags(moneyBags)
+    override fun addItems(items: List<IListable?>) {
+        adapter.setItems(items)
     }
 
-    override fun clearMoneyBags() {
-        adapter.clearMoneyBags()
+    override fun clearItems() {
+        adapter.clearItems()
     }
 
     override fun showLoading() {
         progress_bar.visibility = View.VISIBLE
-        header_text.text =getString(R.string.loading_list_text);
+        header_text.text = getString(R.string.loading_list_text)
     }
 
     override fun hideLoading() {
         progress_bar.visibility = View.GONE
     }
 
-    override fun showTotalMoneyBags(count: Int) {
-        header_text.text =  String.format(getString(R.string.header_text),count)
+    override fun showItems(){
+        adapter.showItems()
+    }
+
+    override fun showTotalItems(count: Int) {
+        header_text.text = String.format(getString(R.string.header_text), count)
     }
 
     private fun initializeRecyclerView() {
-        this.adapter = MoneyBagAdapter(
-            {item : MoneyBag -> presenter.onAddButtonClicked(item)},
-            {item : MoneyBag -> presenter.onLogButtonClicked(item)},
-            {item : MoneyBag -> presenter.onRemoveButtonClicked(item)})
+        this.adapter = ListableItemAdapter(
+            { item: MoneyBag -> presenter.onAddButtonClicked(item) },
+            { item: MoneyBag -> presenter.onLogButtonClicked(item) },
+            { item: IListable -> presenter.onRemoveButtonClicked(item) })
         recycler.adapter = adapter
     }
 
     private fun initializePresenter() {
         var coroutinesExecutor = CoroutinesExecutor()
+        var moneyRepository= MoneyBagRepository()
+        var dayCounterRepository= DayCounterRepository()
         presenter.initPresenter(this,
-            GetMoneyBagsUseCase(MoneyBagRepository(), coroutinesExecutor),
-            DeleteMoneyBagUseCase(MoneyBagRepository(), coroutinesExecutor)
+            GetMoneyBagsUseCase(moneyRepository, coroutinesExecutor),
+            GetDayCounterUseCase(dayCounterRepository, coroutinesExecutor),
+            DeleteMoneyBagUseCase(moneyRepository, coroutinesExecutor),
+            DeleteDayCounterUseCase(dayCounterRepository, coroutinesExecutor)
             )
         presenter.loadData()
     }
@@ -96,8 +106,9 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private val mMyFragmentListener = object : BaseFragment.Listener {
         override fun onDetached(fragment: BaseFragment) {
-            if(fragment is (MoneyBagCreatorDialogFragment)
-                || fragment is (MoneyAmountCreatorDialogFragment)){
+            if (fragment is (MoneyBagCreatorDialogFragment) ||
+                fragment is (MoneyAmountCreatorDialogFragment) ||
+                fragment is (DayCounterCreatorDialogFragment)) {
                 presenter.loadData()
             }
             fragment.setListener(null)
@@ -109,7 +120,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     }
 
     val dialogCreator = fun (func: () -> Unit, messageId: Int) {
-        lateinit var dialog: AlertDialog
+        var dialog: AlertDialog? = null
 
         val builder = AlertDialog.Builder(this)
 
@@ -121,9 +132,9 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
                     func()
-                    dialog.dismiss()
+                    dialog!!.dismiss()
                 }
-                DialogInterface.BUTTON_NEGATIVE -> dialog.dismiss()
+                DialogInterface.BUTTON_NEGATIVE -> dialog!!.dismiss()
             }
         }
 
@@ -132,7 +143,6 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
         // Set the alert dialog negative/no button
         builder.setNegativeButton(R.string.no, dialogClickListener)
-
 
         // Initialize the AlertDialog using builder object
         dialog = builder.create()
