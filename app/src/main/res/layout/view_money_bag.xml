@@ -62,9 +62,11 @@
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp">
                 <TextView
+                        android:id="@+id/date_info_title"
                         android:text="@string/limit_date_hint"
                         style="@style/ListRowTitle"/>
                 <TextView
+                        android:id="@+id/remaining_days_title"
                         android:text="@string/remaining"
                         style="@style/ListRowTitle"/>
             </LinearLayout>
@@ -81,6 +83,7 @@
                         style="@style/ListRowRightItem"/>
             </LinearLayout>
             <LinearLayout
+                    android:id="@+id/amount_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -94,6 +97,7 @@
                         style="@style/ListRowTitle"/>
             </LinearLayout>
             <LinearLayout
+                    android:id="@+id/amount_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

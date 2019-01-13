@@ -5,15 +5,12 @@ import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
 import com.idelcano.moneycontrol.moneycontrol.utils.DhisCodeGenerator
 import java.util.Date
 
-data class MoneyBag(
+data class DayCounter(
     val uid: String = DhisCodeGenerator.generateCode(),
     val name: String,
-    val amount: Long,
-    val dateLimit: Date,
-    val createdDate: Date,
+    val createdDate: Date = Date(),
     val iconPath: String,
-    val priority: Int,
-    var amountList: List<MoneyAmount> = ArrayList()
+    val priority: Int
 ) : IListable {
 
     companion object {
@@ -26,26 +23,11 @@ data class MoneyBag(
             throw IllegalArgumentException("$priority is not a valid priority range")
         }
     }
-    fun result(): Long {
-        var result: Long = 0
-        for (moneyAmount in amountList) {
-            result += moneyAmount.amount
-        }
-        return result
-    }
 
-    fun remainingTime(): Int {
+    fun passTime(): Int {
         val cal = DateParser().getTodayDateWhitoutTime()
-        val diff = dateLimit.getTime() - cal.time.time
+        val diff = cal.time.time - createdDate.getTime()
         val days = DateParser().getDaysFromDiff(diff)
         return days.toInt()
-    }
-
-    fun remainingMoney(): Long {
-        var result = amount
-        for (moneyAmount in amountList) {
-            result -= moneyAmount.amount
-        }
-        return result
     }
 }

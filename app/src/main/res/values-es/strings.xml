@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MoneyControl</string>
+    <string name="action_settings">Opciones</string>
+    <string name="create_money">Crea nueva bolsa de dinero</string>
+    <string name="add">añade</string>
+    <string name="name_hint">nombre</string>
+    <string name="amount_hint">cantidad</string>
+    <string name="limit_date_hint">fecha limite</string>
+    <string name="priority">prioridad</string>
+    <string name="save">guardar</string>
+    <string name="cancel">cancelar</string>
+    <string name="money_bag">Creando bolsa de dinero</string>
+    <string name="name_error">Por favor introduzca un nombre</string>
+    <string name="date_error">Por favor introduzca una fecha</string>
+    <string name="amount_error">Por favor introduzca la cantidad</string>
+    <string name="header_text">"Numero de items %s"</string>
+    <string name="loading_list_text">Cargando lista</string>
+    <string name="add_quantity">Añade nuevo valor</string>
+    <string name="save_new_value">Añade nuevo valor</string>
+    <string name="delete_money_bag">Elimina bolsa de dinero</string>
+    <string name="are_you_sure">¿Estás seguro de que desea borrar el item seleccionado?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="remaining">Dias restantes</string>
+    <string name="amount_remaining">Cantidad restante</string>
+    <string name="creation_date_hint">Fecha de creación</string>
+    <string name="create_day_counter">Crea contador de días</string>
+    <string name="days">Días</string>
+</resources>
