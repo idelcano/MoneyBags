@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.create_day_counter_dialog_layout.view.edit
 import kotlinx.android.synthetic.main.create_day_counter_dialog_layout.view.save_day_counter
 import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_name
 
-class DayCounterCreatorDialogFragment() : BaseFragment(), DayCounterCreatorDialogPresenter.View {
+class DayCounterCreatorDialogFragment : BaseFragment(), DayCounterCreatorDialogPresenter.View {
     lateinit var presenter: DayCounterCreatorDialogPresenter
 
     companion object {

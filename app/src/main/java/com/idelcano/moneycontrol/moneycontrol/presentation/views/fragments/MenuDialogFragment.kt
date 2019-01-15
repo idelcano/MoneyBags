@@ -22,9 +22,9 @@ class MenuDialogFragment : BaseFragment(), MenuDialogPresenter.View {
 
     var companion = Companion
 
-    lateinit var doActions:(Actions) -> Unit
+    lateinit var doActions: (Actions) -> Unit
 
-    fun addActions(doAction: (Actions) -> Unit){
+    fun addActions(doAction: (Actions) -> Unit) {
         doActions = doAction
     }
 

@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private fun initializeFabAction() {
         fab.setOnClickListener { view ->
-            presenter.openMenuDialog();
+            presenter.openMenuDialog()
         }
     }
 
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         progress_bar.visibility = View.GONE
     }
 
-    override fun showItems(){
+    override fun showItems() {
         adapter.showItems()
     }
 
@@ -80,8 +80,8 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
     private fun initializePresenter() {
         var coroutinesExecutor = CoroutinesExecutor()
-        var moneyRepository= MoneyBagRepository()
-        var dayCounterRepository= DayCounterRepository()
+        var moneyRepository = MoneyBagRepository()
+        var dayCounterRepository = DayCounterRepository()
         presenter.initPresenter(this,
             GetMoneyBagsUseCase(moneyRepository, coroutinesExecutor),
             GetDayCounterUseCase(dayCounterRepository, coroutinesExecutor),
