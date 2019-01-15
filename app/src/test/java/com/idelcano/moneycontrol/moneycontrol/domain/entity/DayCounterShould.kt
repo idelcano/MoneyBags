@@ -6,7 +6,7 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 import java.util.Date
 
-class DayCounterShould(){
+class DayCounterShould() {
 
     @Test
     fun `return 10 days when the today date is one plus day than the creation date`() {
