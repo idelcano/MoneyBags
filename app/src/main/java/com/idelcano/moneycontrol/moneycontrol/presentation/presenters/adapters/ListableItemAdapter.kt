@@ -37,7 +37,7 @@ class ListableItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
         val listable: IListable = items[position]!!
         var visibility: Int = View.VISIBLE
-        when(listable) {
+        when (listable) {
             is MoneyBag -> {
                 item_title.setText(listable.name)
                 date.text = DateParser().formatToUI(listable.dateLimit)
@@ -75,7 +75,7 @@ class ListableItemAdapter(
         this.items
     }
 
-    fun showItems(){
+    fun showItems() {
         this.notifyDataSetChanged()
     }
 
