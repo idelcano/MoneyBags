@@ -104,9 +104,7 @@ class MainActivityPresenter {
     fun openMenuDialog() {
         val ft = view!!.supportFragmentManager
         val dialogFragment = MenuDialogFragment()
-        dialogFragment.addActions(
-            fun (action: Actions) {
-            when(action){
+        val actions:(Actions)->Unit = { action: Actions-> when (action) {
                 Actions.CREATE_MONEY_BAG -> {
                     openMoneyBagCreatorFragment()
                 }
@@ -114,7 +112,10 @@ class MainActivityPresenter {
                     openDayCounterFragment()
                 }
             }
-        })
+        }
+        dialogFragment.addActions(
+            actions
+        )
         dialogFragment.show(ft, dialogFragment.companion?.TAG_DIALOG)
     }
 
