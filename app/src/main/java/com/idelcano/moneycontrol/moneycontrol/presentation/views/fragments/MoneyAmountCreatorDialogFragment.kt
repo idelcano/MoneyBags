@@ -76,11 +76,11 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
         return view
     }
 
-    fun showMinusSymbol(buttonView: CompoundButton){
+    fun showMinusSymbol(buttonView: CompoundButton) {
         buttonView.setBackgroundResource(R.drawable.ic_remove_black_48dp)
     }
 
-    fun showPlusSymbol(buttonView: CompoundButton){
+    fun showPlusSymbol(buttonView: CompoundButton) {
         buttonView.setBackgroundResource(R.drawable.ic_add_black_48dp)
     }
 

@@ -97,6 +97,6 @@ class MoneyBagAmountRepositoryShould {
         testMoneyBag = MoneyBag(name = "name", amount = 35, dateLimit = Date(), createdDate = Date(), iconPath = "fakeiconpath", priority = 1)
 
         testMoneyAmount = MoneyAmount(name = "name", amount = 10, creationDate = Date(), moneyBagUid = testMoneyBag.uid, isPositive = false)
-        testMoneyAmount2 = MoneyAmount(name = "name 2", amount = 20, creationDate = Date(), moneyBagUid = testMoneyBag.uid, isPositive = false )
+        testMoneyAmount2 = MoneyAmount(name = "name 2", amount = 20, creationDate = Date(), moneyBagUid = testMoneyBag.uid, isPositive = false)
     }
 }
