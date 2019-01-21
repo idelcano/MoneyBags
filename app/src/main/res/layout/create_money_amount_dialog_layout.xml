@@ -17,7 +17,6 @@
             android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatTextView
-            android:inputType="textCapCharacters"
             android:text="@string/add_quantity"
             style="@style/AppDialogTextView"/>
 
@@ -26,11 +25,20 @@
                 style="@style/AppDialogEdittextContainer">
             <android.support.design.widget.TextInputEditText
                     android:id="@+id/edit_name"
-                    android:inputType="textCapCharacters"
                     style="@style/AppDialogEdittext"
                     android:hint="@string/name_hint"/>
         </android.support.design.widget.TextInputLayout>
-
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:orientation="horizontal">
+            <CheckBox
+                    android:id="@+id/amount_type"
+                    android:layout_width="46dp"
+                    android:layout_height="66dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_remove_black_48dp"
+                    android:button="@null"
+            />
         <android.support.design.widget.TextInputLayout
                 style="@style/AppDialogEdittextContainer">
             <android.support.design.widget.TextInputEditText
@@ -39,6 +47,7 @@
                     android:inputType="number"
                     android:hint="@string/amount_hint"/>
         </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
     </LinearLayout>
 
 

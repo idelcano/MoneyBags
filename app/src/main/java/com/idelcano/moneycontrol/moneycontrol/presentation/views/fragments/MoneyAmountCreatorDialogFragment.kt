@@ -5,6 +5,7 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyAmountRepository
 import com.idelcano.moneycontrol.moneycontrol.data.repositories.MoneyBagRepository
@@ -16,6 +17,7 @@ import com.idelcano.moneycontrol.moneycontrol.presentation.executers.CoroutinesE
 import com.idelcano.moneycontrol.moneycontrol.presentation.presenters.MoneyAmountCreatorDialogPresenter
 import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_amount
 import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.edit_name
+import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.amount_type
 import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.cancel_edit_dialog
 import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.edit_amount
 import kotlinx.android.synthetic.main.create_money_amount_dialog_layout.view.edit_name
@@ -48,25 +50,38 @@ class MoneyAmountCreatorDialogFragment : BaseFragment(), MoneyAmountCreatorDialo
 
         presenter.loadMoneyBag(uid)
 
-        view.save_money_amount.setOnClickListener { view ->
+        view.amount_type.setOnCheckedChangeListener {
+                buttonView, checkedStatus ->
+            presenter.toggleAmount(buttonView, checkedStatus)
+        }
+        presenter.initAmount(view.amount_type)
+        view.save_money_amount.setOnClickListener { _ ->
             saveMoneyAmount()
         }
 
-        view.cancel_edit_dialog.setOnClickListener { view ->
+        view.cancel_edit_dialog.setOnClickListener { _ ->
             cancel()
         }
 
         setCancelable(false)
 
-        view.edit_name.setOnClickListener({ v ->
+        view.edit_name.setOnClickListener({ _ ->
             view.edit_name.setError(null)
         })
 
-        view.edit_amount.setOnClickListener({ v ->
+        view.edit_amount.setOnClickListener({ _ ->
             view.edit_amount.setError(null)
         })
 
         return view
+    }
+
+    fun showMinusSymbol(buttonView: CompoundButton){
+        buttonView.setBackgroundResource(R.drawable.ic_remove_black_48dp)
+    }
+
+    fun showPlusSymbol(buttonView: CompoundButton){
+        buttonView.setBackgroundResource(R.drawable.ic_add_black_48dp)
     }
 
     override fun onDestroy() {

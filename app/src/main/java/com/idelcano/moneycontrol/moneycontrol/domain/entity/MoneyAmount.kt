@@ -8,5 +8,6 @@ data class MoneyAmount(
     val name: String,
     val amount: Long,
     val creationDate: Date,
-    val moneyBagUid: String
+    val moneyBagUid: String,
+    val isPositive: Boolean
 )

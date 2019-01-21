@@ -41,7 +41,7 @@ class MoneyAmountLogDialogFragment : BaseFragment(), MoneyAmountLogDialogPresent
 
         presenter.loadMoneyBag(uid)
 
-        view.cancel_money_log_dialog.setOnClickListener { view ->
+        view.cancel_money_log_dialog.setOnClickListener { _ ->
             cancel()
         }
         setCancelable(false)

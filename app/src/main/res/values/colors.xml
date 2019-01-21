@@ -11,6 +11,5 @@
     <color name="blush">#E36588</color>
     <color name="raspberry">#9A275A</color>
     <color name="white">#ffffff</color>
-
-
+    <color name="transparent">#00000000</color>
 </resources>

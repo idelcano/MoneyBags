@@ -17,6 +17,7 @@ data class MoneyAmountDB(
     @Column var name: String? = null,
     @Column var amount: Long? = null,
     @Column var creationDate: Date = Date(),
+    @Column var isPositive: Boolean = false,
     @ForeignKey(
         tableClass = MoneyBagDB::class,
         references = arrayOf<ForeignKeyReference>(

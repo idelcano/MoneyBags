@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import com.idelcano.moneycontrol.moneycontrol.R
 import com.idelcano.moneycontrol.moneycontrol.domain.entity.MoneyAmount
 import com.idelcano.moneycontrol.moneycontrol.utils.DateParser
-import kotlinx.android.synthetic.main.view_money_amount_item.view.*
+import kotlinx.android.synthetic.main.view_money_amount_item.view.amount_quantity
+import kotlinx.android.synthetic.main.view_money_amount_item.view.amount_title
+import kotlinx.android.synthetic.main.view_money_amount_item.view.creation_date
+import kotlinx.android.synthetic.main.view_money_amount_item.view.delete_amount_button
 
 class MoneyAmountAdapter(val listener: (MoneyAmount) -> Unit) :
     RecyclerView.Adapter<MoneyAmountAdapter.ViewHolder>() {
@@ -22,7 +25,11 @@ class MoneyAmountAdapter(val listener: (MoneyAmount) -> Unit) :
         val moneyAmount: MoneyAmount = moneyAmounts[position]!!
 
         amount_title.text = moneyAmount.name
-        amount_quantity.text = moneyAmount.amount.toString()
+        var symbol: String = "-"
+        if (moneyAmount.isPositive) {
+            symbol = "+"
+        }
+        amount_quantity.text = symbol + moneyAmount.amount.toString()
         creation_date.text = DateParser().formatToUI(moneyAmount.creationDate)
         delete_amount_button.setOnClickListener { listener(moneyAmount) }
     }
