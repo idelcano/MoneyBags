@@ -38,7 +38,7 @@
     </style>
     <style name="AppDialogEdittextContainer" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_height">66dp</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="colorAccent">@color/blue</item>
     </style>
