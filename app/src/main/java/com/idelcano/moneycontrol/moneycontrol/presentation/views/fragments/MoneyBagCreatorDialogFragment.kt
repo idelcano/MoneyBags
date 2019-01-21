@@ -79,23 +79,23 @@ class MoneyBagCreatorDialogFragment : BaseFragment(), MoneyBagCreatorDialogPrese
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(activity!!.applicationContext, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+        val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             edit_date.setText(presenterCreator.formatDateToUI(year, monthOfYear, dayOfMonth))
         }, year, month, day)
 
         view.edit_date.setOnClickListener({
-                _ ->
+                view ->
             view.edit_date.setError(null)
             dpd.show()
         })
 
         view.edit_name.setOnClickListener({
-                _ ->
+                view ->
             view.edit_name.setError(null)
         })
 
         view.edit_amount.setOnClickListener({
-                _ ->
+                view ->
             view.edit_amount.setError(null)
         })
         return view
