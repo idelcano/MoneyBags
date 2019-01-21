@@ -46,7 +46,6 @@ class MainActivityShould {
 
     @Test fun `has_a_action_button_visible`() {
         onView(withId(R.id.fab))
-                .perform(click())
                 .check(matches(isDisplayed()))
     }
 
@@ -73,7 +72,7 @@ class MainActivityShould {
         onView(withText(R.string.create_day_counter))
             .check(matches(isDisplayed()))
 
-        onView(withText(R.string.create_money))
+        onView(withText(R.string.create_day_counter))
             .perform(click())
 
         onView(withId(R.id.create_day_counter_dialog))

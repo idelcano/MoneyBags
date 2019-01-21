@@ -174,7 +174,7 @@ class CreationMoneyAmountsFragmentShould {
 
     private fun createExpectedAmount(expectedMoneyBag: MoneyBag): MoneyAmount {
         var expectedAmount: MoneyAmount =
-            MoneyAmount(name = "testname", amount = 15, creationDate = Date(), moneyBagUid = expectedMoneyBag.uid)
+            MoneyAmount(name = "testname", amount = 15, creationDate = Date(), moneyBagUid = expectedMoneyBag.uid, isPositive = false)
         return expectedAmount
     }
 
