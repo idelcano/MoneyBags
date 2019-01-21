@@ -44,7 +44,11 @@ data class MoneyBag(
     fun remainingMoney(): Long {
         var result = amount
         for (moneyAmount in amountList) {
-            result -= moneyAmount.amount
+            if (moneyAmount.isPositive) {
+                result += moneyAmount.amount
+            } else {
+                result -= moneyAmount.amount
+            }
         }
         return result
     }

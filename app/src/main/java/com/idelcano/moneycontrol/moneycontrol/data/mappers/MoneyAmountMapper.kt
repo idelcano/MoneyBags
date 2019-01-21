@@ -23,7 +23,8 @@ class MoneyAmountMapper {
         return MoneyAmount(
             moneyAmountDB.amountUid!!,
             moneyAmountDB.name!!, moneyAmountDB.amount!!,
-            moneyAmountDB!!.creationDate, moneyAmountDB.moneyBagUid!!
+            moneyAmountDB!!.creationDate, moneyAmountDB.moneyBagUid!!,
+            moneyAmountDB.isPositive
         )
     }
 
@@ -31,7 +32,8 @@ class MoneyAmountMapper {
         return MoneyAmountDB(
             moneyAmount.uid,
             moneyAmount.name, moneyAmount.amount,
-            moneyAmount.creationDate, moneyAmount.moneyBagUid
+            moneyAmount.creationDate, moneyAmount.isPositive,
+            moneyAmount.moneyBagUid
         )
     }
 }

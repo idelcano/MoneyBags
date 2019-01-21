@@ -21,15 +21,19 @@ class MainActivityPresenter {
     lateinit var getMoneyBagListUseCase: GetMoneyBagsUseCase
     lateinit var getDayCountersUseCase: GetDayCounterUseCase
     lateinit var deleteMoneyBagUseCase: DeleteMoneyBagUseCase
-    lateinit var deleteDayCounterUseCase : DeleteDayCounterUseCase
+    lateinit var deleteDayCounterUseCase: DeleteDayCounterUseCase
     var view: MainActivity? = null
 
-    fun initPresenter(view: MainActivity, getMoneyBagListUseCase: GetMoneyBagsUseCase,
-                      getDayCountersUseCase: GetDayCounterUseCase,
-                      deleteMoneyBagUseCase: DeleteMoneyBagUseCase, deleteDayCounterUseCase: DeleteDayCounterUseCase) {
+    fun initPresenter(
+        view: MainActivity,
+        getMoneyBagListUseCase: GetMoneyBagsUseCase,
+        getDayCountersUseCase: GetDayCounterUseCase,
+        deleteMoneyBagUseCase: DeleteMoneyBagUseCase,
+        deleteDayCounterUseCase: DeleteDayCounterUseCase
+    ) {
         this.view = view
         this.getMoneyBagListUseCase = getMoneyBagListUseCase
-        this.getDayCountersUseCase = getDayCountersUseCase;
+        this.getDayCountersUseCase = getDayCountersUseCase
         this.deleteMoneyBagUseCase = deleteMoneyBagUseCase
         this.deleteDayCounterUseCase = deleteDayCounterUseCase
     }
@@ -80,9 +84,9 @@ class MainActivityPresenter {
             MoneyAmountLogDialogFragment().companion?.TAG_DIALOG)
     }
     fun onRemoveButtonClicked(item: IListable) {
-        if(item is MoneyBag) {
+        if (item is MoneyBag) {
             removeMoneyBag(item)
-        } else if (item is DayCounter){
+        } else if (item is DayCounter) {
             removeDayCounter(item)
         }
     }
@@ -104,9 +108,7 @@ class MainActivityPresenter {
     fun openMenuDialog() {
         val ft = view!!.supportFragmentManager
         val dialogFragment = MenuDialogFragment()
-        dialogFragment.addActions(
-            fun (action: Actions) {
-            when(action){
+        val actions: (Actions) -> Unit = { action: Actions -> when (action) {
                 Actions.CREATE_MONEY_BAG -> {
                     openMoneyBagCreatorFragment()
                 }
@@ -114,7 +116,10 @@ class MainActivityPresenter {
                     openDayCounterFragment()
                 }
             }
-        })
+        }
+        dialogFragment.addActions(
+            actions
+        )
         dialogFragment.show(ft, dialogFragment.companion?.TAG_DIALOG)
     }
 

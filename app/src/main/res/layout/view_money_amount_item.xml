@@ -46,10 +46,10 @@
                     android:orientation="horizontal"
                     android:padding="2dp">
                 <TextView
-                        android:id="@+id/creation_date"
+                        android:id="@+id/amount_quantity"
                         style="@style/ListRowLeftItem"/>
                 <TextView
-                        android:id="@+id/amount_quantity"
+                        android:id="@+id/creation_date"
                         style="@style/ListRowRightItem"/>
             </LinearLayout>
     </LinearLayout>
